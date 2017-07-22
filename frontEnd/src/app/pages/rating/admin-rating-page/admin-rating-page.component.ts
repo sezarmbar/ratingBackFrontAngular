@@ -15,6 +15,7 @@ id: String ="1" ;
 requestProcessing = false;
 allRating: Rating[];
 nameRating:string = "new One";
+description:string = "description for theis";
    constructor(private ratingService: RatingService,private route: Router, private activatedRoute: ActivatedRoute ) {}
   
     ngOnInit() {
@@ -30,7 +31,7 @@ nameRating:string = "new One";
     }
 
     createNewRating(){
-      let ratein = new Rating(null,this.nameRating,"0","0","0","0","0",null)
+      let ratein = new Rating(null,this.nameRating,this.description,"0","0","0","0","0",null,)
       this.createUpdaterating(ratein)
     }
 

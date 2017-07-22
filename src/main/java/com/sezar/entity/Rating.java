@@ -23,6 +23,8 @@ public class Rating implements Serializable {
 
     private String nameOfRat;
 
+
+    private String description;
     private String veryBad;
     private String bad;
     private String normal;
@@ -39,13 +41,23 @@ public class Rating implements Serializable {
     public Rating() {
     }
 
-    public Rating(String nameOfRat, String veryBad, String bad, String normal, String god, String veryGod) {
+    public Rating(String nameOfRat, String veryBad, String bad, String normal, String god, String veryGod,String description) {
         this.nameOfRat = nameOfRat;
         this.veryBad = veryBad;
         this.bad = bad;
         this.normal = normal;
         this.god = god;
         this.veryGod = veryGod;
+        this.description = description;
+
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Long getId() {
@@ -126,11 +138,14 @@ public class Rating implements Serializable {
         return "Rating{" +
                 "ratingId=" + ratingId +
                 ", nameOfRat='" + nameOfRat + '\'' +
+                ", description='" + description + '\'' +
                 ", veryBad='" + veryBad + '\'' +
                 ", bad='" + bad + '\'' +
                 ", normal='" + normal + '\'' +
                 ", god='" + god + '\'' +
                 ", veryGod='" + veryGod + '\'' +
+                ", reviews=" + reviews +
+                ", createdAt=" + createdAt +
                 '}';
     }
 
