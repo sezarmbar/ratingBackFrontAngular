@@ -71,7 +71,7 @@ review:Review ;
       this.preProcessConfigurations();
       this.ratingService.getRatingById(id).subscribe(
         (rating) => { this.requestProcessing = false;  this.rating = rating;
-        this.title = rating.nameOfRat 
+        this.title = rating.description; 
         },
         (errorCode) =>  this.statusCode = errorCode);      
             
