@@ -30,6 +30,7 @@ import {
 // service
 import { RatingPageComponent, RatingService, DialogReviewEnter,AdminRatingPageComponent} from './pages/rating';
 import { CreateRatingComponent } from './pages/rating/admin-rating-page/create-rating/create-rating.component';
+import { RatingInfoComponent } from './pages/rating/admin-rating-page/rating-info/rating-info.component';
 
 
 
@@ -39,7 +40,8 @@ import { CreateRatingComponent } from './pages/rating/admin-rating-page/create-r
      RatingPageComponent,
      AdminRatingPageComponent,
      DialogReviewEnter,
-     CreateRatingComponent
+     CreateRatingComponent,
+     RatingInfoComponent
   ],
   imports: [
     BrowserModule,

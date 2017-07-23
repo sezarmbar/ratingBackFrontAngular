@@ -1,0 +1,34 @@
+<p>
+  {{title}}
+</p>
+<form class="example-form">
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <td>
+          <md-input-container class="example-full-width">
+            <input type="string" name="ratingName" #ratingName mdInput placeholder="Rating Name" required >
+          </md-input-container>
+        </td>
+        <td>
+          <md-input-container class="example-full-width">
+            <input mdInput #description name="description" placeholder="Info about rating" required>
+          </md-input-container>
+        </td>
+      </tr>
+      <tr>
+        <md-slide-toggle #active name="active" >Active</md-slide-toggle>
+      </tr>
+    </table>
+
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+      <td>
+        <button md-raised-button type="button"  onClick={this.handleCancel}  color="accent" (click)="onCansle()">Cancele</button>
+
+      </td>
+      <td>
+        <button md-raised-button (click)="readFormData(ratingName,description,active)" color="primary">Create</button>
+      </td>
+    </tr>
+  </table>
+</form>

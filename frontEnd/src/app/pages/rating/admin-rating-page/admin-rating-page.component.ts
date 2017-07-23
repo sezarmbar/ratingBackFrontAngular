@@ -1,6 +1,5 @@
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import {OnInit, Component} from '@angular/core';
-import { CreateRatingComponent } from "./create-rating/create-rating.component";
 import { Rating, Review,RatingService } from "../";
 
 
@@ -12,8 +11,9 @@ import { Rating, Review,RatingService } from "../";
 export class AdminRatingPageComponent implements OnInit {
 titleSide = "Ratings";
 showCreateForm:boolean = false;
+showRatingInfo:boolean =false;
 statusCode: number;
-rating: Rating;
+rating: Rating = new Rating(null,null,null,null,null,null,null,null,null,null);
 id: String ="1" ;
 requestProcessing = false;
 allRating: Rating[];
@@ -72,7 +72,7 @@ allReviwsForRating:Review[];
 
     getAllReviews(){
       this.ratingService.getAllReviews(this.rating).subscribe(
-        reviews=> {this.allReviwsForRating = reviews ;},
+        reviews=> {this.allReviwsForRating = reviews ;this.infoRating()},
         (errorCode) =>  this.statusCode = errorCode)
     }
 
@@ -82,6 +82,10 @@ allReviwsForRating:Review[];
     }
     formOpen(){
       this.showCreateForm = true
+      this.showRatingInfo = false
+    }
+    infoRating(){
+      this.showRatingInfo = true
     }
     preProcessConfigurations() {
       this.statusCode = null;

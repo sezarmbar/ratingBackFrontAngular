@@ -7,7 +7,7 @@
         <span class="toolbarAdmin">{{titleSide}}</span>
       </md-toolbar>
       <md-list>
-        <md-list-item *ngFor="let rating of allRating">{{rating.nameOfRat}}</md-list-item>
+        <md-list-item *ngFor="let rating of allRating"><a md-button (click)="getRating(rating.id)">{{rating.nameOfRat}}</a></md-list-item>
       </md-list>
     </div>
 
@@ -22,5 +22,7 @@
     <button md-raised-button color="accent" *ngIf="!showCreateForm" (click)="formOpen()" color="primary">Create Rating</button>
 
     <app-create-rating *ngIf="showCreateForm" (onCancle)="formClose()" (onDatePicked)="createUpdaterating($event)"></app-create-rating>
+
+    <app-rating-info *ngIf="showRatingInfo" [rating]="rating" [reviews]="allReviwsForRating"></app-rating-info>
   </div>
 </md-sidenav-container>

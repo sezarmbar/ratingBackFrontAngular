@@ -6,3 +6,10 @@ INSERT INTO `concretepage`.`review` (`review_text`, `id`) VALUES ('cvxcvbvcbcxvb
 
 INSERT INTO `concretepage`.`review` (`review_text`, `id`) VALUES ('cvxcvbvcbcxvbvcbvxcb', '2');
 
+INSERT INTO `concretepage`.`review` (`review_text`, `id`) VALUES ('cvxcvbvcbcxvbvcbvxcb', '1');
+
+INSERT INTO `concretepage`.`review` (`review_text`, `id`) VALUES ('cvxcvbvcbcxvbvcbvxcb', '2');
+
+INSERT INTO `concretepage`.`review` (`review_text`, `id`) VALUES ('cvxcvbvcbcxvbvcbvxcb', '1');
+
+
