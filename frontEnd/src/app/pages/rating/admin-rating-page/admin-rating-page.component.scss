@@ -1,7 +1,6 @@
 .admin-sidenav-fab-container {
   width: 100%;
   height: 100vh;
-
 }
 
 .admin-sidenav-fab-container md-sidenav {
@@ -17,11 +16,12 @@
 .admin-scrolling-side-content {
   overflow: auto;
   width: 300px;
-
 }
-.admin-scrolling-content{
+
+.admin-scrolling-content {
   padding-top: 15px;
 }
+
 .admin-fab {
   position: absolute;
   left: 10px;
@@ -29,9 +29,11 @@
 }
 
 .toolbarAdmin {
-    padding-left: 34%;
+  padding-left: 34%;
 }
 
-.admin-content-title{
+.ceate-button { padding-left: 28%;}
+
+.admin-content-title {
   height: 50px;
 }
