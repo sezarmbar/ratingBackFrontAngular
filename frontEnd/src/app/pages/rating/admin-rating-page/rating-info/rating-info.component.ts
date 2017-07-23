@@ -1,5 +1,4 @@
 import { Component, OnInit ,Input} from '@angular/core';
-
 import { Rating,Review } from "../../";
 
 @Component({
@@ -11,12 +10,13 @@ export class RatingInfoComponent implements OnInit {
 
   @Input() rating : Rating;
   @Input() reviews: Review[];
-  
-
-  constructor() { }
+  @Input() chartDate:any;
 
 
-  ngOnInit() {
-  }
+  showChart:boolean = true;
+  constructor() {}
+
+
+  ngOnInit() {}
 
 }

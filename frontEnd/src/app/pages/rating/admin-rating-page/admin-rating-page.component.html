@@ -28,6 +28,6 @@
 
     <app-create-rating *ngIf="showCreateForm" (onCancle)="formClose()" (onDatePicked)="createUpdaterating($event)"></app-create-rating>
 
-    <app-rating-info *ngIf="showRatingInfo" [rating]="rating" [reviews]="allReviwsForRating"></app-rating-info>
+    <app-rating-info *ngIf="showRatingInfo" [rating]="rating" [reviews]="allReviwsForRating"[chartDate]="chartDate"></app-rating-info>
   </div>
 </md-sidenav-container>

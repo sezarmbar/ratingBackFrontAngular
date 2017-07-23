@@ -6,8 +6,7 @@ import {HttpModule, JsonpModule} from '@angular/http';
 import {ServiceAppRoutingModule} from './app-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import 'hammerjs';
-
-
+import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 import {AppComponent} from './app.component';
 
@@ -28,25 +27,25 @@ import {
 } from '@angular/material';
 
 // service
-import { RatingPageComponent, RatingService, DialogReviewEnter,AdminRatingPageComponent} from './pages/rating';
-import { CreateRatingComponent } from './pages/rating/admin-rating-page/create-rating/create-rating.component';
-import { RatingInfoComponent } from './pages/rating/admin-rating-page/rating-info/rating-info.component';
-
-
+import {RatingPageComponent, RatingService, DialogReviewEnter, AdminRatingPageComponent} from './pages/rating';
+import {CreateRatingComponent} from './pages/rating/admin-rating-page/create-rating/create-rating.component';
+import {RatingInfoComponent} from './pages/rating/admin-rating-page/rating-info/rating-info.component';
+import { RatingChartComponent } from './pages/rating/admin-rating-page/rating-info/rating-chart/rating-chart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-     RatingPageComponent,
-     AdminRatingPageComponent,
-     DialogReviewEnter,
-     CreateRatingComponent,
-     RatingInfoComponent
+    RatingPageComponent,
+    AdminRatingPageComponent,
+    DialogReviewEnter,
+    CreateRatingComponent,
+    RatingInfoComponent,
+    RatingChartComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-
+    NgxChartsModule,
     HttpModule,
     BrowserAnimationsModule,
     MdButtonModule,
@@ -65,7 +64,7 @@ import { RatingInfoComponent } from './pages/rating/admin-rating-page/rating-inf
     ServiceAppRoutingModule,
     JsonpModule
   ],
-entryComponents:[DialogReviewEnter],
+  entryComponents: [DialogReviewEnter],
   providers: [RatingService],
   bootstrap: [AppComponent]
 })

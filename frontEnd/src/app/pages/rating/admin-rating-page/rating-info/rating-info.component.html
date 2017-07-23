@@ -1,4 +1,5 @@
-<p>
-  rating-info works!
-</p>
-{{rating.id}}
+{{rating.nameOfRat}} :
+{{rating.description}}
+
+<app-rating-chart [chartDate]="chartDate" *ngIf="showChart"></app-rating-chart>
+

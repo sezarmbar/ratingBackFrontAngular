@@ -20,6 +20,7 @@ allRating: Rating[];
 nameRating:string = "new One";
 description:string = "description for theis";
 allReviwsForRating:Review[];
+chartDate: any ;
    constructor(private ratingService: RatingService,private route: Router, private activatedRoute: ActivatedRoute ) {}
   
     ngOnInit() {
@@ -58,7 +59,7 @@ allReviwsForRating:Review[];
     getRating(id){
       this.preProcessConfigurations();
       this.ratingService.getRatingById(id).subscribe(
-        (rating) => { this.requestProcessing = false;  this.rating = rating; this.getAllReviews()},
+        (rating) => { this.requestProcessing = false;  this.rating = rating; this.constructorChartData(); this.getAllReviews()},
         (errorCode) =>  this.statusCode = errorCode);   
                
     }
@@ -72,11 +73,31 @@ allReviwsForRating:Review[];
 
     getAllReviews(){
       this.ratingService.getAllReviews(this.rating).subscribe(
-        reviews=> {this.allReviwsForRating = reviews ;this.infoRating()},
+        reviews=> {this.allReviwsForRating = reviews ;this.infoRating(); },
         (errorCode) =>  this.statusCode = errorCode)
     }
 
+constructorChartData(){
+  this.chartDate = [
+  {
+    "name": "VeryBad",
+    "value": this.rating.veryBad
+  }, {
+    "name": "Bad",
+    "value": this.rating.bad
+  }, {
+    "name": "Normal",
+    "value": this.rating.normal
+  }, {
+    "name": "God",
+    "value": this.rating.god
+  }, {
+    "name": "VeryGod",
+    "value": this.rating.veryGod
+  }
+];
 
+}
     formClose(){
       this.showCreateForm = false
     }
