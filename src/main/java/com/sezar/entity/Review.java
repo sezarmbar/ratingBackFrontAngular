@@ -1,20 +1,23 @@
 package com.sezar.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by mahmoudbarakat on 21.07.17.
  */
 
 @Entity
-public class Review {
+public class Review implements Serializable {
+
+    private static final long serialVersionUID = 19051221950251237L;
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "review_id")
     private Long reviewId;
 
-    private String review;
+    private String reviewText;
 
     @ManyToOne
     @JoinColumn(name = "id", nullable = false)
@@ -23,17 +26,17 @@ public class Review {
     public Review() {
     }
 
-    public Review(String review, Rating rating) {
-        this.review = review;
+    public Review(String reviewText, Rating rating) {
+        this.reviewText = reviewText;
         this.rating = rating;
     }
 
     public String getReview() {
-        return review;
+        return reviewText;
     }
 
     public void setReview(String review) {
-        this.review = review;
+        this.reviewText = review;
     }
 
 
@@ -57,7 +60,7 @@ public class Review {
     public String toString() {
         return "Review{" +
                 "reviewId=" + reviewId +
-                ", review='" + review + '\'' +
+                ", review='" + reviewText + '\'' +
                 ", rating=" + rating +
                 '}';
     }

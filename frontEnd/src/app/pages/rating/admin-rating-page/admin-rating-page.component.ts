@@ -1,6 +1,6 @@
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import {OnInit, Component} from '@angular/core';
-
+import { CreateRatingComponent } from "./create-rating/create-rating.component";
 import { Rating, Review,RatingService } from "../";
 
 
@@ -10,6 +10,8 @@ import { Rating, Review,RatingService } from "../";
   styleUrls: ['./admin-rating-page.component.scss']
 })
 export class AdminRatingPageComponent implements OnInit {
+titleSide = "Ratings";
+showCreateForm:boolean = false;
 statusCode: number;
 rating: Rating;
 id: String ="1" ;
@@ -22,6 +24,7 @@ allReviwsForRating:Review[];
   
     ngOnInit() {
       this.getAllRating();
+
     }    
    
 
@@ -33,16 +36,17 @@ allReviwsForRating:Review[];
     }
 
     createNewRating(){
-      let ratein = new Rating(null,this.nameRating,this.description,"0","0","0","0","0",null,)
+      let ratein = new Rating(null,this.nameRating,this.description,"0","0","0","0","0",null,true)
       this.createUpdaterating(ratein)
     }
 
      createUpdaterating(rating:Rating){
      this.preProcessConfigurations();
      this.ratingService.putRating(rating).subscribe(
-        (successCode) => {this.statusCode = successCode; this.requestProcessing = false; },
+        (successCode) => {this.statusCode = successCode; this.requestProcessing = false; this.getAllRating();this.formClose()},
         (errorCode) => this.statusCode = errorCode);	  
     }
+      
 
     getAllRating(){
        this.preProcessConfigurations();
@@ -72,6 +76,13 @@ allReviwsForRating:Review[];
         (errorCode) =>  this.statusCode = errorCode)
     }
 
+
+    formClose(){
+      this.showCreateForm = false
+    }
+    formOpen(){
+      this.showCreateForm = true
+    }
     preProcessConfigurations() {
       this.statusCode = null;
       this.requestProcessing = true;   

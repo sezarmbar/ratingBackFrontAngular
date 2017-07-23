@@ -1,10 +1,10 @@
 <md-sidenav-container class="admin-sidenav-fab-container">
   <md-sidenav #sidenav mode="side" opened="true">
 
-    <div class="admin-scrolling-content">
+    <div class="admin-scrolling-side-content">
 
       <md-toolbar color="primary">
-        <span class="toolbarAdmin">Custom Toolbar</span>
+        <span class="toolbarAdmin">{{titleSide}}</span>
       </md-toolbar>
       <md-list>
         <md-list-item *ngFor="let rating of allRating">{{rating.nameOfRat}}</md-list-item>
@@ -13,11 +13,14 @@
 
 
   </md-sidenav>
-  <button md-mini-fab class="admin-fab" (click)="sidenav.toggle()">
+  <button md-mini-fab color="primary" class="admin-fab" (click)="sidenav.toggle()">
     <md-icon>menu</md-icon>
   </button>
   <div class="admin-scrolling-content">
+    <div class="admin-content-title"></div>    
 
-   
+    <button md-raised-button color="accent" *ngIf="!showCreateForm" (click)="formOpen()" color="primary">Create Rating</button>
+
+    <app-create-rating *ngIf="showCreateForm" (onCancle)="formClose()" (onDatePicked)="createUpdaterating($event)"></app-create-rating>
   </div>
 </md-sidenav-container>

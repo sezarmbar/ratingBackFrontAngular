@@ -14,12 +14,14 @@
   overflow: visible;
 }
 
-.admin-scrolling-content {
+.admin-scrolling-side-content {
   overflow: auto;
   width: 300px;
 
 }
-
+.admin-scrolling-content{
+  padding-top: 15px;
+}
 .admin-fab {
   position: absolute;
   left: 10px;
@@ -27,5 +29,9 @@
 }
 
 .toolbarAdmin {
-    padding-left: 20%;
+    padding-left: 34%;
+}
+
+.admin-content-title{
+  height: 50px;
 }

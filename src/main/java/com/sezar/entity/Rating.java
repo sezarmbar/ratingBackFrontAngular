@@ -16,6 +16,8 @@ import java.util.Set;
 @Table(name="rating")
 public class Rating implements Serializable {
 
+    private static final long serialVersionUID = 1905122041950251237L;
+
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "rating_id")
@@ -30,6 +32,7 @@ public class Rating implements Serializable {
     private String normal;
     private String god;
     private String veryGod;
+    private boolean active;
 
     @OneToMany(mappedBy = "rating",fetch = FetchType.LAZY)
     @JsonIgnore
@@ -41,7 +44,7 @@ public class Rating implements Serializable {
     public Rating() {
     }
 
-    public Rating(String nameOfRat, String veryBad, String bad, String normal, String god, String veryGod,String description) {
+    public Rating(String nameOfRat, String veryBad, String bad, String normal, String god, String veryGod,String description,boolean active) {
         this.nameOfRat = nameOfRat;
         this.veryBad = veryBad;
         this.bad = bad;
@@ -49,7 +52,16 @@ public class Rating implements Serializable {
         this.god = god;
         this.veryGod = veryGod;
         this.description = description;
+        this.active = active;
 
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public String getDescription() {

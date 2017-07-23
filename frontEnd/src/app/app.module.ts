@@ -1,8 +1,8 @@
 import {BrowserModule} from '@angular/platform-browser';
+import {FormsModule} from '@angular/forms';
 import {NgModule, ApplicationRef} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HttpModule, JsonpModule} from '@angular/http';
-import {FormsModule} from '@angular/forms';
 import {ServiceAppRoutingModule} from './app-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import 'hammerjs';
@@ -23,11 +23,13 @@ import {
   MdIconModule,
   MdListModule,
   MdDialogModule,
-  MdToolbarModule
+  MdToolbarModule,
+  MdSlideToggleModule
 } from '@angular/material';
 
 // service
 import { RatingPageComponent, RatingService, DialogReviewEnter,AdminRatingPageComponent} from './pages/rating';
+import { CreateRatingComponent } from './pages/rating/admin-rating-page/create-rating/create-rating.component';
 
 
 
@@ -36,11 +38,13 @@ import { RatingPageComponent, RatingService, DialogReviewEnter,AdminRatingPageCo
     AppComponent,
      RatingPageComponent,
      AdminRatingPageComponent,
-     DialogReviewEnter
+     DialogReviewEnter,
+     CreateRatingComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+
     HttpModule,
     BrowserAnimationsModule,
     MdButtonModule,
@@ -55,6 +59,7 @@ import { RatingPageComponent, RatingService, DialogReviewEnter,AdminRatingPageCo
     MdListModule,
     MdDialogModule,
     MdToolbarModule,
+    MdSlideToggleModule,
     ServiceAppRoutingModule,
     JsonpModule
   ],
