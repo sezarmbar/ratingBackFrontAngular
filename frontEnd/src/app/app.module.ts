@@ -22,12 +22,14 @@ import {
   MdTabsModule,
   MdIconModule,
   MdListModule,
-  MdDialogModule
+  MdDialogModule,
+  MdToolbarModule
 } from '@angular/material';
 
 // service
-import { RatingPageComponent, RatingService, DialogReviewEnter} from './pages/rating';
-import { AdminRatingPageComponent } from './pages/rating/admin-rating-page/admin-rating-page.component';
+import { RatingPageComponent, RatingService, DialogReviewEnter,AdminRatingPageComponent} from './pages/rating';
+
+
 
 @NgModule({
   declarations: [
@@ -52,6 +54,7 @@ import { AdminRatingPageComponent } from './pages/rating/admin-rating-page/admin
     MdIconModule,
     MdListModule,
     MdDialogModule,
+    MdToolbarModule,
     ServiceAppRoutingModule,
     JsonpModule
   ],

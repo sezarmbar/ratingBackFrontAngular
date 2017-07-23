@@ -1,7 +1,8 @@
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import {OnInit, Component} from '@angular/core';
-import { RatingService } from '../service/rating.service';
-import { Rating } from "../";
+
+import { Rating, Review,RatingService } from "../";
+
 
 @Component({
   selector: 'app-admin-rating-page',
@@ -16,10 +17,11 @@ requestProcessing = false;
 allRating: Rating[];
 nameRating:string = "new One";
 description:string = "description for theis";
+allReviwsForRating:Review[];
    constructor(private ratingService: RatingService,private route: Router, private activatedRoute: ActivatedRoute ) {}
   
     ngOnInit() {
-      this.getRating(this.id)
+      this.getAllRating();
     }    
    
 
@@ -38,36 +40,35 @@ description:string = "description for theis";
      createUpdaterating(rating:Rating){
      this.preProcessConfigurations();
      this.ratingService.putRating(rating).subscribe(
-        (successCode) => { this.statusCode = successCode; console.log(successCode)},
+        (successCode) => {this.statusCode = successCode; this.requestProcessing = false; },
         (errorCode) => this.statusCode = errorCode);	  
     }
 
     getAllRating(){
        this.preProcessConfigurations();
        this.ratingService.getAllRatings().subscribe(
-        (data) => this.allRating = data,
+        (data) => {this.allRating = data; this.requestProcessing = false;},
         (errorCode) =>  this.statusCode = errorCode);  
     }
       
     getRating(id){
       this.preProcessConfigurations();
       this.ratingService.getRatingById(id).subscribe(
-        (rating) => { this.requestProcessing = false;  this.rating = rating;
-        console.log(this.rating)
-        },
-        (errorCode) =>  this.statusCode = errorCode);          
+        (rating) => { this.requestProcessing = false;  this.rating = rating; this.getAllReviews()},
+        (errorCode) =>  this.statusCode = errorCode);   
+               
     }
 
     deletRaing(id){
       this.preProcessConfigurations();
       this.ratingService.deleteRatingById(id).subscribe(
-        (successCode) => { this.statusCode = successCode; this.getAllRating() },
+        (successCode) => { this.statusCode = successCode; this.requestProcessing = false; this.getAllRating() },
         (errorCode) =>  this.statusCode = errorCode );    
     }
 
     getAllReviews(){
       this.ratingService.getAllReviews(this.rating).subscribe(
-        reviews=> console.log(reviews),
+        reviews=> {this.allReviwsForRating = reviews ;},
         (errorCode) =>  this.statusCode = errorCode)
     }
 

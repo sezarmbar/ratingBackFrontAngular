@@ -1,6 +1,23 @@
-  <button (click)="getAllReviews()">getAllReviews</button>   
-  
-  
-  
-  
-  <button (click)="createNewRating()">createNewRating</button>   
+<md-sidenav-container class="admin-sidenav-fab-container">
+  <md-sidenav #sidenav mode="side" opened="true">
+
+    <div class="admin-scrolling-content">
+
+      <md-toolbar color="primary">
+        <span class="toolbarAdmin">Custom Toolbar</span>
+      </md-toolbar>
+      <md-list>
+        <md-list-item *ngFor="let rating of allRating">{{rating.nameOfRat}}</md-list-item>
+      </md-list>
+    </div>
+
+
+  </md-sidenav>
+  <button md-mini-fab class="admin-fab" (click)="sidenav.toggle()">
+    <md-icon>menu</md-icon>
+  </button>
+  <div class="admin-scrolling-content">
+
+   
+  </div>
+</md-sidenav-container>
