@@ -44,7 +44,6 @@ export class AdminRatingPageComponent implements OnInit {
 
   updateRatingActiveStatus(value:boolean):void{
     this.rating.active = value;
-    console.log(this.rating)
     this.createUpdaterating(this.rating);
     
   }
@@ -59,6 +58,7 @@ export class AdminRatingPageComponent implements OnInit {
         this.getAllRating();
         this.formClose()
       }, (errorCode) => this.statusCode = errorCode);
+
   }
 
   getAllRating() {
