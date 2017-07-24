@@ -8,7 +8,7 @@ export class RatingChartComponent implements OnInit {
   single : any[];
   multi : any[];
 
-  view : any[] = [775, 450];
+  view : any[] = [600, 280];
 
 
   // options

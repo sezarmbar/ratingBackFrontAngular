@@ -1,5 +1,7 @@
 package com.sezar.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -17,10 +19,13 @@ public class Review implements Serializable {
     @Column(name = "review_id")
     private Long reviewId;
 
+    @Lob
     private String reviewText;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+//    @ManyToOne
     @JoinColumn(name = "id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Rating rating;
 
     public Review() {

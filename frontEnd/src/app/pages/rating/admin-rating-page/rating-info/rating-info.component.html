@@ -1,5 +1,37 @@
-{{rating.nameOfRat}} :
-{{rating.description}}
+<div class="app-rating-chart-div" id="inner">
 
-<app-rating-chart [chartDate]="chartDate" *ngIf="showChart"></app-rating-chart>
 
+  <app-rating-chart [chartDate]="chartDate"></app-rating-chart>
+</div>
+
+
+
+<div class="review-table-container mat-elevation-z8">
+  <div class="review-table-header"> {{rating.nameOfRat}} : {{rating.description}}
+
+  </div>
+  <div>
+    <md-slide-toggle #active name="active" [(ngModel)]="checked" (change)="outRatingStatus(active.checked)" >Active</md-slide-toggle>
+  </div>
+  <md-table #table [dataSource]="dataSource">
+
+
+
+    <!-- Name Column -->
+    <ng-container cdkColumnDef="userName">
+      <md-header-cell *cdkHeaderCellDef> Text </md-header-cell>
+      <md-cell *cdkCellDef="let row"> {{row.name}} </md-cell>
+    </ng-container>
+
+
+    <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
+    <md-row *cdkRowDef="let row; columns: displayedColumns;
+    let first = first; let last = last; let even = even; let odd = odd" [ngClass]="{
+               'demo-row-highlight-first': highlights.has('first') && first,
+               'demo-row-highlight-last': highlights.has('last') && last,
+               'demo-row-highlight-even': highlights.has('even') && even,
+               'demo-row-highlight-odd': highlights.has('odd') && odd
+             }">
+    </md-row>
+  </md-table>
+</div>

@@ -80,6 +80,7 @@ review:Review ;
 
     addReview(enterdReview){
       let review = new Review(null,enterdReview,this.rating);
+      console.log(review)
       this.ratingService.putReview(review).subscribe(
         (successCode) =>{ this.statusCode = successCode;this.enteredReview = null;},
         (errorCode) => this.statusCode = errorCode);	  

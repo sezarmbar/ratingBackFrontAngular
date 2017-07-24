@@ -30,4 +30,9 @@ public class ReviewServiceImpl implements ReviewService {
     }
     @Override
     public  List<Review> findAllByRating(Rating rating){return reviewRepository.findAllByRating(rating);}
+
+    @Override
+    public List<Review> findAllByRatingLazy(Rating rating) {
+        return  reviewRepository.findAllByRatingLazy(rating);
+    }
 }

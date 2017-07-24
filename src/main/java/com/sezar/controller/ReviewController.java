@@ -31,7 +31,8 @@ public class ReviewController {
 
     @PostMapping("all-reviews")
     public ResponseEntity<List<Review>> getAllReviews(@RequestBody Rating rating){
-        List<Review> list = reviewService.findAllByRating(rating);
+//        List<Review> list = reviewService.findAllByRating(rating);
+        List<Review> list = reviewService.findAllByRatingLazy(rating);
         return new ResponseEntity<List<Review>>(list, HttpStatus.OK);
     }
 

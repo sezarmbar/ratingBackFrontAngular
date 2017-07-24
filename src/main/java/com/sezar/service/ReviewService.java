@@ -12,5 +12,5 @@ public interface ReviewService {
     public List<Review> findAll();
     public boolean createReview(Review review);
     public  List<Review> findAllByRating(Rating rating);
-
+    public  List<Review> findAllByRatingLazy(Rating rating);
 }
