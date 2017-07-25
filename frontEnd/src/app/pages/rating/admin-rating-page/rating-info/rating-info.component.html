@@ -27,10 +27,10 @@
     <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
     <md-row *cdkRowDef="let row; columns: displayedColumns;
     let first = first; let last = last; let even = even; let odd = odd" [ngClass]="{
-               'demo-row-highlight-first': highlights.has('first') && first,
-               'demo-row-highlight-last': highlights.has('last') && last,
-               'demo-row-highlight-even': highlights.has('even') && even,
-               'demo-row-highlight-odd': highlights.has('odd') && odd
+               'row-highlight-first': highlights.has('first') && first,
+               'row-highlight-last': highlights.has('last') && last,
+               'row-highlight-even': highlights.has('even') && even,
+               'row-highlight-odd': highlights.has('odd') && odd
              }">
     </md-row>
   </md-table>

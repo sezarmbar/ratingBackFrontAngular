@@ -18,11 +18,11 @@ export class RatingInfoComponent implements OnInit {
   checked : boolean = false;
   showChart : boolean = true;
   highlights = new Set < string > ();
-  constructor() {}
-
   displayedColumns = ['userName'];
   reviewDatabase;
   dataSource : ReviewDataSource | null;
+  constructor() {}
+
   outRatingStatus(data:boolean):void {
     this.changRatingActiveStatus.emit(data)
   }

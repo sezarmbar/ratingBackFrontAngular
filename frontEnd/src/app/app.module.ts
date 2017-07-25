@@ -49,6 +49,7 @@ import {RatingPageComponent, RatingService, DialogReviewEnter, AdminRatingPageCo
 import {CreateRatingComponent} from './pages/rating/admin-rating-page/create-rating/create-rating.component';
 import {RatingInfoComponent} from './pages/rating/admin-rating-page/rating-info/rating-info.component';
 import { RatingChartComponent } from './pages/rating/admin-rating-page/rating-info/rating-chart/rating-chart.component';
+import { ErrorPageComponent } from './pages/error-page/error-page.component';
 
 
 // @NgModule({
@@ -96,7 +97,8 @@ import { RatingChartComponent } from './pages/rating/admin-rating-page/rating-in
     DialogReviewEnter,
     CreateRatingComponent,
     RatingInfoComponent,
-    RatingChartComponent
+    RatingChartComponent,
+    ErrorPageComponent
   ],
   imports: [
     BrowserModule,

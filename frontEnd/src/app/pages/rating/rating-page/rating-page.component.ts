@@ -1,8 +1,9 @@
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, Params,ParamMap } from '@angular/router';
 import {OnInit, Component} from '@angular/core';
 import { RatingService } from '../service/rating.service';
 import { Rating,Review } from "../";
 import {MdDialog, MdDialogRef} from '@angular/material';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-rating-page',
@@ -24,11 +25,13 @@ enteredReview: string= null;
 
 review:Review ;
 
-   constructor(public dialog: MdDialog,private ratingService: RatingService, private activatedRoute: ActivatedRoute ) {}
+   constructor(public dialog: MdDialog,private ratingService: RatingService,private router: Router,private activatedRoute: ActivatedRoute ) {}
   
     ngOnInit() {
-       this.readIdFromUrl()
-
+      let id = this.activatedRoute.snapshot.paramMap.get('id');
+      this.getRating(id);
+//          or
+      //  this.readIdFromUrl()
     }    
    openDialog() {
     let dialogRef = this.dialog.open(DialogReviewEnter);
@@ -42,9 +45,13 @@ review:Review ;
 
 
     readIdFromUrl(){
-      this.activatedRoute.params.subscribe(
-        (params: Params) => {this.id = params['id']; this.getRating(this.id); this.isLoaded = true},
-        (err)=>console.log(err))
+      this.activatedRoute.paramMap.switchMap((params:ParamMap)=>this.ratingService.getRatingById(params.get('id')))
+                                  .subscribe((rating:Rating)=>this.rating = rating,
+                                             (errorCode)=> this.statusCode = errorCode);
+                                            //  or
+      // this.activatedRoute.params.subscribe(
+      //   (params: Params) => {this.id = params['id']; this.getRating(this.id); this.isLoaded = true},
+      //   (err)=>console.log(err))
     }
 
 

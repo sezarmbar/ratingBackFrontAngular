@@ -6,14 +6,17 @@ import { Observable } from 'rxjs';
 import { Rating,Review } from "../";
 @Injectable()
 export class RatingService {
-	port = "8080"
-	rating = "http://localhost:"+this.port+"/api/rating";
-	allrating = "http://localhost:"+this.port+"/api/all-rating";
+  adress = "http://localhost:8080"
+//   adress = ""
+//   adress = "/rating-app"
 
-	allReview = "http://localhost:"+this.port+"/api/all-reviews";
+	rating = this.adress+"/api/rating";
+	allrating = this.adress+"/api/all-rating";
 
-	review = "http://localhost:"+this.port+"/api/review";
-	constructor(private http:Http) { 
+	allReview = this.adress+"/api/all-reviews";
+
+	review = this.adress+"/api/review";
+	constructor(private http:Http) {
 	}
 // Review --------
 
@@ -45,16 +48,16 @@ export class RatingService {
 		        .catch(this.handleError);
 
     }
-		
+
 	getRatingById(id: string): Observable<Rating> {
 		let cpHeaders = new Headers({ 'Content-Type': 'application/json' });
 		let cpParams = new URLSearchParams();
-		cpParams.set('id', id);			
+		cpParams.set('id', id);
 		let options = new RequestOptions({ headers: cpHeaders, params: cpParams });
 		return this.http.get(this.rating, options)
 			   .map(this.extractData)
 			   .catch(this.handleError);
-	}	
+	}
 
 	putRating(rating: Rating):Observable<number> {
 	    let cpHeaders = new Headers({ 'Content-Type': 'application/json' });
@@ -62,27 +65,27 @@ export class RatingService {
         return this.http.post(this.rating, rating, options)
                .map(success => success.status)
                .catch(this.handleError);
-	}	
+	}
 	deleteRatingById(id: string): Observable<number> {
 		let cpHeaders = new Headers({ 'Content-Type': 'application/json' });
 		let cpParams = new URLSearchParams();
-		cpParams.set('id', id);			
+		cpParams.set('id', id);
 		let options = new RequestOptions({ headers: cpHeaders, params: cpParams });
 		return this.http.delete(this.rating, options)
 			   .map(success => success.status)
 			   .catch(this.handleError);
-    }		
+    }
 
 	// Utils -------------
 	private extractData(res: Response) {
 	    let body = res.json();
         return body;
 	}
-	
+
     private handleError (error: Response | any) {
 		console.error(error.message || error);
 		return Observable.throw(error.status);
 	}
 
-	
+
 }
