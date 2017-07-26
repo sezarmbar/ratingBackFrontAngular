@@ -39,6 +39,14 @@ public class RatingController {
         return new ResponseEntity<Rating>(rating, HttpStatus.OK);
     }
 
+    @GetMapping("ratingName")
+    public ResponseEntity<Rating> getArticleByName(@RequestParam String name, Model model) {
+        Rating rating = ratingService.findByNameOfRat(name);
+        return new ResponseEntity<Rating>(rating, HttpStatus.OK);
+    }
+
+
+
     @PostMapping("rating")
     public ResponseEntity<Void> createArticle(@RequestBody Rating rating, UriComponentsBuilder builder) {
         boolean flag = ratingService.createRating(rating);

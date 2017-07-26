@@ -13,7 +13,6 @@ export class RatingInfoComponent implements OnInit {
   @Input()rating : Rating;
   @Input()reviews : Review[];
   @Input()chartDate : any;
-
   @Output()changRatingActiveStatus : EventEmitter < any > = new EventEmitter < any > ();
   checked : boolean = false;
   showChart : boolean = true;
@@ -21,6 +20,7 @@ export class RatingInfoComponent implements OnInit {
   displayedColumns = ['userName'];
   reviewDatabase;
   dataSource : ReviewDataSource | null;
+  createdAt: string;
   constructor() {}
 
   outRatingStatus(data:boolean):void {
@@ -33,6 +33,7 @@ export class RatingInfoComponent implements OnInit {
     this
       .highlights
       .add("odd")
+      this.convertCreatedAt()
   }
   ngOnInit() {
     this.checked = this.rating.active;
@@ -41,11 +42,23 @@ export class RatingInfoComponent implements OnInit {
     this
       .highlights
       .add("odd")
+      this.convertCreatedAt()
 
-    // this.dataSource = new ReviewDataSource(this.reviewDatabase);
+  }
+
+  convertCreatedAt(){
+    let todate=new Date(this.rating.createdAt).getDate();
+    let tomonth=new Date(this.rating.createdAt).getMonth()+1;
+    let toyear=new Date(this.rating.createdAt).getFullYear();
+    this.createdAt = tomonth+'/'+todate+'/'+toyear;
   }
 
 }
+
+
+
+
+
 
 export interface Reviews {
   name : string;

@@ -17,6 +17,7 @@
     <th>NORMAL</th>
     <th>ZUFRIEDEN</th>
     <th>GLÜCKLICH</th>
+    <th>HERGESTELLT IN</th>
   </tr>
   <tr>
     <td>
@@ -34,13 +35,14 @@
     <td>{{rating.normal}}</td>
     <td>{{rating.god}}</td>
     <td>{{rating.veryGod}}</td>
+    <td>{{createdAt}}</td>
   </tr>
 </table>
 
 <div class="review-table-container mat-elevation-z8">
   <md-table #table [dataSource]="dataSource">
     <ng-container cdkColumnDef="userName">
-      <md-header-cell *cdkHeaderCellDef> TableRatingTitile </md-header-cell>
+      <md-header-cell *cdkHeaderCellDef> Bewertungen </md-header-cell>
       <md-cell *cdkCellDef="let row"> {{row.name}} </md-cell>
     </ng-container>
     <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
