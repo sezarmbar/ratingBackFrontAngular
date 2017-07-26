@@ -1,29 +1,48 @@
 <div class="app-rating-chart-div" id="inner">
-
-
   <app-rating-chart [chartDate]="chartDate"></app-rating-chart>
 </div>
 
 
 
+<table class="rating-data">
+  <tr>
+    <th>Name</th>
+    <th>Info</th>
+    <th>
+      <div *ngIf="active.checked">Aktiv</div>
+      <div *ngIf="!active.checked">Deaktiviert</div>
+    </th>
+    <th>SCHLICHT</th>
+    <th>UNZUFRIEDEN</th>
+    <th>NORMAL</th>
+    <th>ZUFRIEDEN</th>
+    <th>GLÜCKLICH</th>
+  </tr>
+  <tr>
+    <td>
+      <a routerLink="/r/{{rating.nameOfRat}}">
+        {{rating.nameOfRat}}
+      </a>
+    </td>
+    <td> {{rating.description}}</td>
+    <td>
+      <md-slide-toggle #active name="active" [(ngModel)]="checked" (change)="outRatingStatus(active.checked)">
+      </md-slide-toggle>
+    </td>
+    <td>{{rating.veryBad}}</td>
+    <td>{{rating.bad}}</td>
+    <td>{{rating.normal}}</td>
+    <td>{{rating.god}}</td>
+    <td>{{rating.veryGod}}</td>
+  </tr>
+</table>
+
 <div class="review-table-container mat-elevation-z8">
-  <div class="review-table-header"> {{rating.nameOfRat}} : {{rating.description}}
-
-  </div>
-  <div>
-    <md-slide-toggle #active name="active" [(ngModel)]="checked" (change)="outRatingStatus(active.checked)" >Active</md-slide-toggle>
-  </div>
   <md-table #table [dataSource]="dataSource">
-
-
-
-    <!-- Name Column -->
     <ng-container cdkColumnDef="userName">
-      <md-header-cell *cdkHeaderCellDef> Text </md-header-cell>
+      <md-header-cell *cdkHeaderCellDef> TableRatingTitile </md-header-cell>
       <md-cell *cdkCellDef="let row"> {{row.name}} </md-cell>
     </ng-container>
-
-
     <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
     <md-row *cdkRowDef="let row; columns: displayedColumns;
     let first = first; let last = last; let even = even; let odd = odd" [ngClass]="{

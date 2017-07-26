@@ -18,7 +18,7 @@
 
 
 
-<div class="rating-page-main">
+<div class="rating-page-main" *ngIf="isRatinActiveded">
   <div>
     <div *ngIf="isLoaded" class="title"> {{title}}</div>
     <table class="emoghTable">
@@ -31,4 +31,8 @@
       </tr>
     </table>
   </div>
+</div>
+
+<div *ngIf="!isRatinActiveded">
+  <h1>Sie mussen Bewertung akitvieren </h1>
 </div>

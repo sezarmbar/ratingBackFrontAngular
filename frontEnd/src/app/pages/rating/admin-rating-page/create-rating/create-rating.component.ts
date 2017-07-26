@@ -9,8 +9,6 @@ styleUrls: ['./create-rating.component.scss']
 export class CreateRatingComponent implements OnInit {
   @Output() onDatePicked: EventEmitter<any> = new EventEmitter<any>();
   @Output() onCancle: EventEmitter<any> = new EventEmitter<any>();
-  
-  title = "Rating";
 
   constructor() {}
   rating : Rating;

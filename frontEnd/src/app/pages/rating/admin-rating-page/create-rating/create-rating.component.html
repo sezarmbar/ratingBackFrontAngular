@@ -1,33 +1,40 @@
-<p>
-  {{title}}
-</p>
+
+  
+    <h2>
+     <p class="blocktext"> Bewertung<p>
+    </h2>
+   
+
 <form class="example-form">
-    <table class="example-full-width" cellspacing="0">
-      <tr>
-        <td>
-          <md-input-container class="example-full-width">
-            <input type="string" name="ratingName" #ratingName mdInput placeholder="Rating Name" required >
-          </md-input-container>
-        </td>
-        <td>
-          <md-input-container class="example-full-width">
-            <input mdInput #description name="description" placeholder="Info about rating" required>
-          </md-input-container>
-        </td>
-      </tr>
-      <tr>
-        <md-slide-toggle #active name="active" >Active</md-slide-toggle>
-      </tr>
-    </table>
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+      <td>
+        <md-input-container class="example-full-width">
+          <input type="string" name="ratingName" #ratingName mdInput placeholder="Bewertung Name" required>
+        </md-input-container>
+      </td>
+      <td>
+        <md-input-container class="example-full-width">
+          <input mdInput #description name="description" placeholder="Info über Bewertung" required>
+        </md-input-container>
+      </td>
+    </tr>
+    <tr>
+      <md-slide-toggle #active name="active">
+        <div *ngIf="active.checked">Aktiv</div>
+        <div *ngIf="!active.checked">Deaktiviert</div>
+      </md-slide-toggle>
+    </tr>
+  </table>
 
   <table class="example-full-width" cellspacing="0">
     <tr>
       <td>
-        <button md-raised-button type="button"  onClick={this.handleCancel}  color="accent" (click)="onCansle()">Cancele</button>
+        <button md-raised-button type="button" onClick={this.handleCancel} color="accent" (click)="onCansle()">Stornieren</button>
 
       </td>
       <td class="create-rating-button">
-        <button md-raised-button (click)="readFormData(ratingName,description,active)" color="primary">Create</button>
+        <button md-raised-button (click)="readFormData(ratingName,description,active)" color="primary">Erstellen</button>
       </td>
     </tr>
   </table>

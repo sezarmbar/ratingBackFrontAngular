@@ -22,6 +22,7 @@ isLoaded:boolean=false;
 title:String = null;
 enteredReview: string= null;
 
+isRatinActiveded:boolean =false;
 
 review:Review ;
 
@@ -77,7 +78,7 @@ review:Review ;
     getRating(id){
       this.preProcessConfigurations();
       this.ratingService.getRatingById(id).subscribe(
-        (rating) => { this.requestProcessing = false;  this.rating = rating;
+        (rating) => { this.requestProcessing = false; this.isRatinActiveded=rating.active; this.rating = rating;
         this.title = rating.description; 
         },
         (errorCode) =>  this.statusCode = errorCode);      

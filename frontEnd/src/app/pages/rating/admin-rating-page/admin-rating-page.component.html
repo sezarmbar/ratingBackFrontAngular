@@ -4,30 +4,39 @@
     <div class="admin-scrolling-side-content">
 
       <md-toolbar color="primary">
-        <span class="toolbarAdmin">{{titleSide}}</span>
+        <span class="toolbarAdmin">Bewertungen</span>
+        <button md-mini-fab color="primary" *ngIf="sidenav.opened" class="admin-fab-close" (click)="sidenav.toggle()">
+          <md-icon>close</md-icon>
+        </button>
       </md-toolbar>
-
       <md-list>
         <md-list-item>
-          <div class="ceate-button"> 
-            <button md-raised-button color="accent" *ngIf="!showCreateForm" (click)="formOpen()" color="primary">Create Rating</button>
+          <div class="ceate-button">
+            <button md-raised-button color="accent" *ngIf="!showCreateForm" (click)="formOpen()" color="primary">
+              Bewertung erstellen
+            </button>
           </div>
         </md-list-item>
-        <md-list-item *ngFor="let rating of allRating"><a md-button (click)="getRating(rating.id)">{{rating.nameOfRat}}</a></md-list-item>
+        <md-list-item *ngFor="let rating of allRating"><a md-button
+                                                          (click)="getRating(rating.id)">{{rating.nameOfRat}}</a>
+        </md-list-item>
       </md-list>
     </div>
 
 
   </md-sidenav>
-  <button md-mini-fab color="primary" class="admin-fab" (click)="sidenav.toggle()">
+  <button md-mini-fab color="primary" *ngIf="!sidenav.opened" class="admin-fab" (click)="sidenav.toggle()">
     <md-icon>menu</md-icon>
   </button>
   <div class="admin-scrolling-content">
     <div class="admin-content-title"></div>
 
 
-    <app-create-rating *ngIf="showCreateForm" (onCancle)="formClose()" (onDatePicked)="createUpdaterating($event)"></app-create-rating>
+    <app-create-rating *ngIf="showCreateForm" (onCancle)="formClose()"
+                       (onDatePicked)="createUpdaterating($event)"></app-create-rating>
 
-    <app-rating-info (changRatingActiveStatus)="updateRatingActiveStatus($event)" *ngIf="showRatingInfo" [rating]="rating" [reviews]="allReviwsForRating"[chartDate]="chartDate" #setReviewData ></app-rating-info>
+    <app-rating-info (changRatingActiveStatus)="updateRatingActiveStatus($event)" *ngIf="showRatingInfo"
+                     [rating]="rating" [reviews]="allReviwsForRating"
+                     [chartDate]="chartDate" #setReviewData></app-rating-info>
   </div>
 </md-sidenav-container>

@@ -5,7 +5,7 @@ import {RatingInfoComponent} from "./rating-info/rating-info.component";
 
 @Component({selector: 'app-admin-rating-page', templateUrl: './admin-rating-page.component.html', styleUrls: ['./admin-rating-page.component.scss']})
 export class AdminRatingPageComponent implements OnInit {
-  titleSide = "Ratings";
+
   showCreateForm : boolean = false;
   showRatingInfo : boolean = false;
   statusCode : number;
@@ -115,19 +115,19 @@ export class AdminRatingPageComponent implements OnInit {
   constructorChartData() {
     this.chartDate = [
       {
-        "name": "VeryBad",
+        "name": "schlicht",
         "value": this.rating.veryBad
       }, {
-        "name": "Bad",
+        "name": "unzufrieden",
         "value": this.rating.bad
       }, {
-        "name": "Normal",
+        "name": "normal",
         "value": this.rating.normal
       }, {
-        "name": "God",
+        "name": "zufrieden",
         "value": this.rating.god
       }, {
-        "name": "VeryGod",
+        "name": "glücklich",
         "value": this.rating.veryGod
       }
     ];
