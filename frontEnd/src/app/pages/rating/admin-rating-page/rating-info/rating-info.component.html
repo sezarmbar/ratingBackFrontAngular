@@ -1,31 +1,25 @@
-<div class="app-rating-chart-div" id="inner">
-  <app-rating-chart [chartDate]="chartDate"></app-rating-chart>
-</div>
-
-
-
+<md-list>
+  <md-list-item>Name: &nbsp;
+    <h1> {{rating.nameOfRat}}</h1> &nbsp;&nbsp;&nbsp;
+    <a color="primary" md-raised-button routerLink="/r/{{rating.nameOfRat}}">Bewertungen Seite</a> &nbsp;&nbsp;&nbsp;
+    <a color="primary" md-raised-button  (click)="ceatePDF()">PDF</a> </md-list-item>
+  <md-list-item>Beschreibung: &nbsp;{{rating.description}}</md-list-item>
+  <md-list-item>Hergestellt in: &nbsp;{{createdAt}}</md-list-item>
+</md-list>
+<p></p>
 <table class="rating-data">
   <tr>
-    <th>Name</th>
-    <th>Info</th>
-    <th>
+    <td>
       <div *ngIf="active.checked">Aktiv</div>
       <div *ngIf="!active.checked">Deaktiviert</div>
-    </th>
-    <th>SCHLICHT</th>
-    <th>UNZUFRIEDEN</th>
-    <th>NORMAL</th>
-    <th>ZUFRIEDEN</th>
-    <th>GLÜCKLICH</th>
-    <th>HERGESTELLT IN</th>
+    </td>
+    <td>SCHLICHT</td>
+    <td>UNZUFRIEDEN</td>
+    <td>NORMAL</td>
+    <td>ZUFRIEDEN</td>
+    <td>GLÜCKLICH</td>
   </tr>
   <tr>
-    <td>
-      <a routerLink="/r/{{rating.nameOfRat}}">
-        {{rating.nameOfRat}}
-      </a>
-    </td>
-    <td> {{rating.description}}</td>
     <td>
       <md-slide-toggle #active name="active" [(ngModel)]="checked" (change)="outRatingStatus(active.checked)">
       </md-slide-toggle>
@@ -35,9 +29,18 @@
     <td>{{rating.normal}}</td>
     <td>{{rating.god}}</td>
     <td>{{rating.veryGod}}</td>
-    <td>{{createdAt}}</td>
   </tr>
 </table>
+<p> </p>
+
+
+
+
+<div class="app-rating-chart-div" id="inner">
+  <app-rating-chart #chartContainer id="chartContainer" [chartDate]="chartDate"></app-rating-chart>
+</div>
+
+
 
 <div class="review-table-container mat-elevation-z8">
   <md-table #table [dataSource]="dataSource">
