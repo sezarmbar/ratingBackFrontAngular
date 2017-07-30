@@ -3,6 +3,7 @@ package com.sezar.service.impl;
 import com.sezar.repository.RatingRepository;
 import com.sezar.entity.Rating;
 import com.sezar.service.RatingService;
+import com.sezar.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,10 @@ public class RatingServiceImpl implements RatingService {
 
     @Autowired
     RatingRepository ratingRepository ;
+
+    @Autowired
+    ReviewService reviewService;
+
 
     @Override
     public Rating findById(Long id) {
@@ -45,7 +50,9 @@ public class RatingServiceImpl implements RatingService {
     }
 
     @Override
-    public void deleteRating(Long id) {
-        ratingRepository.delete(id);
+    public void deleteRating(Rating rating) {
+
+        reviewService.deleteReviewByRating(rating);
+        ratingRepository.delete(rating);
     }
 }

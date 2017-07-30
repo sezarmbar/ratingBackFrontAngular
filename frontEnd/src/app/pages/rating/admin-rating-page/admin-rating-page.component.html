@@ -12,13 +12,13 @@
       <md-list>
         <md-list-item>
           <div class="ceate-button">
-            <button md-raised-button color="accent" *ngIf="!showCreateForm" (click)="formOpen()" color="primary">
+            <button md-raised-button color="accent" (click)="formOpen()" color="primary">
               Bewertung erstellen
             </button>
           </div>
         </md-list-item>
         <md-list-item *ngFor="let rating of allRating"><a md-button
-                                                          (click)="getRating(rating.id)">{{rating.nameOfRat}}</a>
+                                                          (click)="getRatingLocal(rating)">{{rating.nameOfRat}}</a>
         </md-list-item>
       </md-list>
     </div>
@@ -29,14 +29,17 @@
     <md-icon>menu</md-icon>
   </button>
   <div class="admin-scrolling-content">
-    <div class="admin-content-title"></div>
-
+     <div class="admin-content-title"></div> 
 
     <app-create-rating *ngIf="showCreateForm" (onCancle)="formClose()"
                        (onDatePicked)="createUpdaterating($event)"></app-create-rating>
 
-    <app-rating-info (changRatingActiveStatus)="updateRatingActiveStatus($event)" *ngIf="showRatingInfo"
+
+<md-slide-toggle #observ id="observ"  *ngIf="showRatingInfo" (change)="getAllReviewsObservable($event)" >Verfolgung</md-slide-toggle>
+                         
+    <app-rating-info *ngIf="showRatingInfo" (changRatingActiveStatus)="updateRatingActiveStatus($event)" 
+                     (deletRatingId)="deletRating($event)"
                      [rating]="rating" [reviews]="allReviwsForRating"
                      [chartDate]="chartDate" #setReviewData></app-rating-info>
-  </div>
+                     </div>
 </md-sidenav-container>

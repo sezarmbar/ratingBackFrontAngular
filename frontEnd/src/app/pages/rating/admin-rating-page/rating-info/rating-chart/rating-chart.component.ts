@@ -12,7 +12,7 @@ export class RatingChartComponent implements OnInit {
 
 
   // options
-  showLegend = true;
+  showLegend = false;
 
   colorScheme = {
     domain: ['#E83237', '#E86939', '#EAC341', '#25CF3C', '#38A4E8']

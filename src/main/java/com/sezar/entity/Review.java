@@ -16,15 +16,14 @@ public class Review implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name = "review_id")
-    private Long reviewId;
+    private Long id;
 
     @Lob
     private String reviewText;
 
     @ManyToOne(fetch = FetchType.LAZY)
 //    @ManyToOne
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "rating_id", nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Rating rating;
 
@@ -54,17 +53,17 @@ public class Review implements Serializable {
     }
 
     public Long getReviewId() {
-        return reviewId;
+        return id;
     }
 
-    public void setReviewId(Long reviewId) {
-        this.reviewId = reviewId;
+    public void setReviewId(Long id) {
+        this.id = id;
     }
 
     @Override
     public String toString() {
         return "Review{" +
-                "reviewId=" + reviewId +
+                "reviewId=" + id +
                 ", review='" + reviewText + '\'' +
                 ", rating=" + rating +
                 '}';

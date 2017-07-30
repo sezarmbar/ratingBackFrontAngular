@@ -45,9 +45,9 @@ import {
 } from '@angular/material';
 import {CdkTableModule} from '@angular/cdk';
 // service
-import {RatingPageComponent, RatingService, DialogReviewEnter, AdminRatingPageComponent} from './pages/rating';
+import {RatingPageComponent, RatingService,ApiService, DialogReviewEnter, AdminRatingPageComponent} from './pages/rating';
 import {CreateRatingComponent} from './pages/rating/admin-rating-page/create-rating/create-rating.component';
-import {RatingInfoComponent} from './pages/rating/admin-rating-page/rating-info/rating-info.component';
+import {RatingInfoComponent,RatingDeleteDialog} from './pages/rating/admin-rating-page/rating-info/rating-info.component';
 import { RatingChartComponent } from './pages/rating/admin-rating-page/rating-info/rating-chart/rating-chart.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 
@@ -95,6 +95,7 @@ import { ErrorPageComponent } from './pages/error-page/error-page.component';
     RatingPageComponent,
     AdminRatingPageComponent,
     DialogReviewEnter,
+    RatingDeleteDialog,
     CreateRatingComponent,
     RatingInfoComponent,
     RatingChartComponent,
@@ -102,10 +103,10 @@ import { ErrorPageComponent } from './pages/error-page/error-page.component';
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,    
+    BrowserAnimationsModule,
     FormsModule,
     HttpModule,
-    MdNativeDateModule,    
+    MdNativeDateModule,
     ReactiveFormsModule,
     NgxChartsModule,
     ServiceAppRoutingModule,
@@ -143,8 +144,8 @@ import { ErrorPageComponent } from './pages/error-page/error-page.component';
     MdToolbarModule,
     MdTooltipModule,
   ],
-  entryComponents: [DialogReviewEnter],
-  providers: [RatingService],
+  entryComponents: [RatingDeleteDialog,DialogReviewEnter],
+  providers: [RatingService,ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

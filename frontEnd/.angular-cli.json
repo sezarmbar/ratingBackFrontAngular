@@ -24,7 +24,10 @@
         "../node_modules/swiper/dist/css/swiper.css"
       ],
       "scripts": [
-        "../node_modules/swiper/dist/js/swiper.js"
+        "../node_modules/swiper/dist/js/swiper.js",
+        "../node_modules/jspdf/dist/jspdf.min.js",
+        "../node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.src.js"
+        
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

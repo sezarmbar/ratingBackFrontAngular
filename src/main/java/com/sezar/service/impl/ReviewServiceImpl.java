@@ -35,4 +35,10 @@ public class ReviewServiceImpl implements ReviewService {
     public List<Review> findAllByRatingLazy(Rating rating) {
         return  reviewRepository.findAllByRatingLazy(rating);
     }
+
+    @Override
+    public void deleteReviewByRating(Rating rating) {
+        reviewRepository.deleteReviewByRating(rating);
+    }
+
 }

@@ -1,6 +1,6 @@
 
-import {Component, ViewEncapsulation, ElementRef, ChangeDetectionStrategy} from '@angular/core';
-import {  } from "@angualr/common";
+import {Component} from '@angular/core';
+
 
 
 declare  var window:any;

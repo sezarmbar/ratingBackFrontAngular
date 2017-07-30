@@ -15,6 +15,6 @@ public interface RatingService {
     boolean createRating(Rating rating);
     boolean updateRating(Rating rating);
     public List<Rating> findAll();
-    void deleteRating(Long id);
+    void deleteRating(Rating rating);
 
 }

@@ -58,9 +58,9 @@ public class RatingController {
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("rating")
-    public ResponseEntity<Void> deleteRating(@RequestParam("id") String id) {
-        ratingService.deleteRating(Long.parseLong(id));
+    @PostMapping("delete-rating")
+    public ResponseEntity<Void> deleteRating(@RequestBody Rating rating) {
+        ratingService.deleteRating(rating);
         return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
     }
 

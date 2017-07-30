@@ -1,4 +1,4 @@
-import {Router, ActivatedRoute, Params, ParamMap} from '@angular/router';
+import {Router, ActivatedRoute,NavigationEnd, Params, ParamMap} from '@angular/router';
 import {OnInit, Component} from '@angular/core';
 import {RatingService} from '../service/rating.service';
 import {Rating, Review} from "../";
@@ -22,17 +22,32 @@ export class RatingPageComponent implements OnInit {
 
   review : Review;
 
-  constructor(public dialog : MdDialog, private ratingService : RatingService, private router : Router, private activatedRoute : ActivatedRoute) {}
+  constructor(public dialog : MdDialog, private ratingService : RatingService, private router : Router, private activatedRoute : ActivatedRoute) {
+
+
+    router.events.subscribe((val: any) => {
+      // console.log(val.url)
+       this.getURL();
+    });
+  }
+  
 
   ngOnInit() {
-    let name = this
+    this.getURL();
+
+    //          or
+      // this.readIdFromUrl()
+  }
+
+  getURL(){
+        let name = this
       .activatedRoute
       .snapshot
       .paramMap
       .get('id');
     this.getRatingByName(name);
-    //          or  this.readIdFromUrl()
   }
+
   openDialog() {
     let dialogRef = this
       .dialog
@@ -47,16 +62,18 @@ export class RatingPageComponent implements OnInit {
       });
   }
 
-  // readIdFromUrl() {
-  //   this
-  //     .activatedRoute
-  //     .paramMap
-  //     .switchMap((params : ParamMap) => this.ratingService.getRatingById(params.get('id')))
-  //     .subscribe((rating : Rating) => this.rating = rating, (errorCode) => this.statusCode = errorCode);
-  //   //  or this.activatedRoute.params.subscribe(   (params: Params) => {this.id =
-  //   // params['id']; this.getRating(this.id); this.isLoaded = true},
-  //   // (err)=>console.log(err))
-  // }
+  readIdFromUrl() {
+    let name = 
+    this
+      .activatedRoute
+      .paramMap
+      .switchMap((params : ParamMap) => params.get('id'));
+      this.getRatingByName(name);
+      console.log(name);
+    //  or this.activatedRoute.params.subscribe(   (params: Params) => {this.id =
+    // params['id']; this.getRating(this.id); this.isLoaded = true},
+    // (err)=>console.log(err))
+  }
 
   updateRating(event) {
     let rat = event.target.id;
@@ -73,7 +90,6 @@ export class RatingPageComponent implements OnInit {
       .putRating(rating)
       .subscribe((successCode) => {
         this.statusCode = successCode;
-        console.log(successCode)
       }, (errorCode) => this.statusCode = errorCode);
   }
 
@@ -106,7 +122,6 @@ export class RatingPageComponent implements OnInit {
 
   addReview(enterdReview) {
     let review = new Review(null, enterdReview, this.rating);
-    console.log(review)
     this
       .ratingService
       .putReview(review)

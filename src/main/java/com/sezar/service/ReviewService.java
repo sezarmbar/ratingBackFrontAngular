@@ -13,4 +13,5 @@ public interface ReviewService {
     public boolean createReview(Review review);
     public  List<Review> findAllByRating(Rating rating);
     public  List<Review> findAllByRatingLazy(Rating rating);
+    public  void deleteReviewByRating(Rating rating);
 }

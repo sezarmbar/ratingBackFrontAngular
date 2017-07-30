@@ -1,7 +1,8 @@
 import {Router, ActivatedRoute, Params} from '@angular/router';
-import {OnInit, Component, ViewChild} from '@angular/core';
+import {OnInit, Component, ViewChild,ElementRef} from '@angular/core';
 import {Rating, Review, RatingService} from "../";
 import {RatingInfoComponent} from "./rating-info/rating-info.component";
+import {Observable} from 'rxjs/Rx';
 
 @Component({selector: 'app-admin-rating-page', templateUrl: './admin-rating-page.component.html', styleUrls: ['./admin-rating-page.component.scss']})
 export class AdminRatingPageComponent implements OnInit {
@@ -17,8 +18,10 @@ export class AdminRatingPageComponent implements OnInit {
   description : string = "description for theis";
   allReviwsForRating : Review[];
   chartDate : any;
-
+  currentRatingId;
   @ViewChild('setReviewData')ReviewData : RatingInfoComponent;
+  observ:boolean=false;
+  observSubscribe: any;
   constructor(private ratingService : RatingService, private route : Router, private activatedRoute : ActivatedRoute) {}
 
   ngOnInit() {
@@ -44,8 +47,19 @@ export class AdminRatingPageComponent implements OnInit {
 
   updateRatingActiveStatus(value:boolean):void{
     this.rating.active = value;
-    this.createUpdaterating(this.rating);
+    this.Updaterating(this.rating);
     
+  }
+  Updaterating(rating : Rating) {
+    this.preProcessConfigurations();
+    this
+      .ratingService
+      .putRating(rating)
+      .subscribe((successCode) => {
+        this.statusCode = successCode;
+        this.requestProcessing = false;
+      }, (errorCode) => this.statusCode = errorCode);
+
   }
   createUpdaterating(rating : Rating) {
     this.preProcessConfigurations();
@@ -81,23 +95,58 @@ export class AdminRatingPageComponent implements OnInit {
         this.requestProcessing = false;
         this.rating = rating;
         this.constructorChartData();
-        this.getAllReviews()
+        if(!this.observ || !(this.currentRatingId == id))
+       { this.getAllReviews(); }
+        this.currentRatingId =id;
       }, (errorCode) => this.statusCode = errorCode);
 
   }
 
-  deletRaing(id) {
+  getRatingLocal(rating:Rating){
+    this.infoRating();
+    this.rating = rating;
+    this.constructorChartData();
+    if(!this.observ || !(this.currentRatingId == rating.id))
+       { this.getAllReviews(); }
+    this.currentRatingId =rating.id;
+  }
+
+  deletRating(rating) {
     this.preProcessConfigurations();
     this
       .ratingService
-      .deleteRatingById(id)
+      .deleteRatingByRating(rating)
       .subscribe((successCode) => {
         this.statusCode = successCode;
         this.requestProcessing = false;
-        this.getAllRating()
+        this.getAllRating();
+        this.closeInfpRating();
       }, (errorCode) => this.statusCode = errorCode);
   }
 
+
+  getAllReviewsObservable(value){
+        if (value.checked == true) {
+          this.ovservSubscribe();
+          this.observ = true;
+        } else {
+          this.ovservUnSubscribe();
+          this.observ = false;
+        }
+
+  }
+  ovservSubscribe(){
+    this.observSubscribe =   Observable.interval(50 * 60).subscribe(x => {
+    this.getAllReviews();
+    this.getRating(this.currentRatingId);
+  });
+  }
+  ovservUnSubscribe(){
+    if(this.observSubscribe!=undefined)
+    {this.observSubscribe.unsubscribe();}
+  }
+  
+  
   getAllReviews() {
     this
       .ratingService
@@ -139,10 +188,14 @@ export class AdminRatingPageComponent implements OnInit {
   formOpen() {
     this.showCreateForm = true
     this.showRatingInfo = false
+    this.ovservUnSubscribe()
   }
   infoRating() {
-    this.showCreateForm = false
+    this.formClose();
     this.showRatingInfo = true
+  }
+  closeInfpRating(){
+    this.showRatingInfo = false;
   }
   preProcessConfigurations() {
     this.statusCode = null;
