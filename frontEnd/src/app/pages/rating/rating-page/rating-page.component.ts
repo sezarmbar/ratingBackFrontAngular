@@ -1,46 +1,48 @@
-import {Router, ActivatedRoute,NavigationEnd, Params, ParamMap} from '@angular/router';
-import {OnInit, Component} from '@angular/core';
-import {RatingService} from '../service/rating.service';
-import {Rating, Review} from "../";
-import {MdDialog, MdDialogRef} from '@angular/material';
+import { Router, ActivatedRoute, NavigationEnd, Params, ParamMap } from '@angular/router';
+import { OnInit, Component } from '@angular/core';
+import { RatingService } from '../service/rating.service';
+import { Rating, Review } from "../";
+import { MdDialog, MdDialogRef } from '@angular/material';
 import 'rxjs/add/operator/switchMap';
 
-@Component({selector: 'app-rating-page', templateUrl: './rating-page.component.html', styleUrls: ['./rating-page.component.scss']})
+@Component({ selector: 'app-rating-page', templateUrl: './rating-page.component.html', styleUrls: ['./rating-page.component.scss'] })
 export class RatingPageComponent implements OnInit {
-  statusCode : number;
-  rating : Rating;
-  id : String;
+  statusCode: number;
+  rating: Rating;
+  id: String;
   requestProcessing = false;
-  allRating : Rating[];
+  allRating: Rating[];
 
-  isLoaded : boolean = false;
+  isLoaded: boolean = false;
 
-  title : String = null;
-  enteredReview : string = null;
+  title: String = null;
+  enteredReview: string = null;
 
-  isRatinActiveded : boolean = false;
+  isRatinActiveded: boolean = false;
 
-  review : Review;
+  review: Review;
 
-  constructor(public dialog : MdDialog, private ratingService : RatingService, private router : Router, private activatedRoute : ActivatedRoute) {
+  timeout: boolean = true;
+  timeoutReview: boolean = false;
+  constructor(public dialog: MdDialog, private ratingService: RatingService, private router: Router, private activatedRoute: ActivatedRoute) {
 
 
     router.events.subscribe((val: any) => {
       // console.log(val.url)
-       this.getURL();
+      this.getURL();
     });
   }
-  
+
 
   ngOnInit() {
     this.getURL();
 
     //          or
-      // this.readIdFromUrl()
+    // this.readIdFromUrl()
   }
 
-  getURL(){
-        let name = this
+  getURL() {
+    let name = this
       .activatedRoute
       .snapshot
       .paramMap
@@ -49,41 +51,52 @@ export class RatingPageComponent implements OnInit {
   }
 
   openDialog() {
-    let dialogRef = this
-      .dialog
-      .open(DialogReviewEnter);
-    dialogRef
-      .afterClosed()
-      .subscribe(result => {
-        this.enteredReview = result;
-        if (this.enteredReview != null && this.enteredReview != "") {
-          this.addReview(this.enteredReview)
-        }
-      });
+    if (this.timeoutReview) {
+      let dialogRef = this
+        .dialog
+        .open(DialogReviewEnter);
+      dialogRef
+        .afterClosed()
+        .subscribe(result => {
+          this.enteredReview = result;
+          if (this.enteredReview != null && this.enteredReview != "") {
+            this.addReview(this.enteredReview)
+          } else {
+            this.timeoutReview = false;
+          }
+        });
+    }
   }
 
   readIdFromUrl() {
-    let name = 
-    this
-      .activatedRoute
-      .paramMap
-      .switchMap((params : ParamMap) => params.get('id'));
-      this.getRatingByName(name);
-      console.log(name);
+    let name =
+      this
+        .activatedRoute
+        .paramMap
+        .switchMap((params: ParamMap) => params.get('id'));
+    this.getRatingByName(name);
+    console.log(name);
     //  or this.activatedRoute.params.subscribe(   (params: Params) => {this.id =
     // params['id']; this.getRating(this.id); this.isLoaded = true},
     // (err)=>console.log(err))
   }
 
   updateRating(event) {
-    let rat = event.target.id;
-    let tmpValue = this.rating[rat];
-    tmpValue = (parseInt(tmpValue) + 1)
-    this.rating[rat] = tmpValue
-    this.onAddOrUpdateRate(this.rating);
+    if (this.timeout) {
+      let rat = event.target.id;
+      let tmpValue = this.rating[rat];
+      tmpValue = (parseInt(tmpValue) + 1)
+      this.rating[rat] = tmpValue
+      this.timeout = false;
+      this.onAddOrUpdateRate(this.rating);
+      if (rat === "bad" || rat === "veryBad")
+        this.timeoutReview = true;
+      setTimeout(() => this.timeout = true, 1000 * 60);
+    }
+
   }
 
-  onAddOrUpdateRate(rating : Rating) {
+  onAddOrUpdateRate(rating: Rating) {
     this.preProcessConfigurations();
     this
       .ratingService
@@ -122,14 +135,16 @@ export class RatingPageComponent implements OnInit {
 
   addReview(enterdReview) {
     let review = new Review(null, enterdReview, this.rating);
-    this
-      .ratingService
-      .putReview(review)
-      .subscribe((successCode) => {
-        this.statusCode = successCode;
-        this.enteredReview = null;
-      }, (errorCode) => this.statusCode = errorCode);
-
+    if (this.timeoutReview) {
+      this.timeoutReview = false;
+      this
+        .ratingService
+        .putReview(review)
+        .subscribe((successCode) => {
+          this.statusCode = successCode;
+          this.enteredReview = null;
+        }, (errorCode) => this.statusCode = errorCode);
+    }
   }
 
   preProcessConfigurations() {
@@ -139,9 +154,9 @@ export class RatingPageComponent implements OnInit {
 
 }
 
-@Component({selector: 'dialog-review-enter', templateUrl: 'dialog-review-enter.html', styleUrls: ['./dialog-review-enter.scss']})
+@Component({ selector: 'dialog-review-enter', templateUrl: 'dialog-review-enter.html', styleUrls: ['./dialog-review-enter.scss'] })
 export class DialogReviewEnter {
-  public enteredReview : string;
-  constructor(public dialogRef : MdDialogRef < DialogReviewEnter >) {}
+  public enteredReview: string;
+  constructor(public dialogRef: MdDialogRef<DialogReviewEnter>) { }
 
 }
