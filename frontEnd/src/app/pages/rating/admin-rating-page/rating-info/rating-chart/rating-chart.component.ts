@@ -6,19 +6,12 @@ export class RatingChartComponent implements OnInit {
 
 @Input() chartDate: any;
   single : any[];
-  multi : any[];
-
+  multi : any[]
   view : any[] = [600, 280];
-
-
-  // options
-  showLegend = false;
-
+  showLegend = true;
   colorScheme = {
     domain: ['#E83237', '#E86939', '#EAC341', '#25CF3C', '#38A4E8']
   };
-
-  // pie
   showLabels = true;
   explodeSlices = false;
   doughnut = false;
