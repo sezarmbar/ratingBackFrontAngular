@@ -5,8 +5,8 @@ import {Observable} from 'rxjs';
 import {Rating, Review} from "../";
 @Injectable()
 export class RatingService {
-  adress = "http://localhost:8080"
-  //   adress = ""
+  // adress = "http://localhost:8080"
+    adress = "http://localhost:8080/rating-app"
   // adress = "/rating-app"
 
   rating = this.adress + "/api/rating";
