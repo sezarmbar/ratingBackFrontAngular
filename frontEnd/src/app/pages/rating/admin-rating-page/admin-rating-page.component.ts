@@ -18,7 +18,7 @@ export class AdminRatingPageComponent implements OnInit {
   description : string = "description for theis";
   allReviwsForRating : Review[];
   chartDate : any;
-  currentRatingId;
+  oldRatingId;
   @ViewChild('setReviewData')ReviewData : RatingInfoComponent;
   observ:boolean=false;
   observSubscribe: any;
@@ -95,9 +95,9 @@ export class AdminRatingPageComponent implements OnInit {
         this.requestProcessing = false;
         this.rating = rating;
         this.constructorChartData();
-        if(!this.observ || !(this.currentRatingId == id))
+        if(!this.observ || !(this.oldRatingId == id))
        { this.getAllReviews(); }
-        this.currentRatingId =id;
+        this.oldRatingId =id;
       }, (errorCode) => this.statusCode = errorCode);
 
   }
@@ -106,9 +106,9 @@ export class AdminRatingPageComponent implements OnInit {
     this.infoRating();
     this.rating = rating;
     this.constructorChartData();
-    if(!this.observ || !(this.currentRatingId == rating.id))
+    // if(!this.observ || this.oldRatingId != rating.id)
        { this.getAllReviews(); }
-    this.currentRatingId =rating.id;
+    this.oldRatingId =rating.id;
   }
 
   deletRating(rating) {
@@ -138,7 +138,7 @@ export class AdminRatingPageComponent implements OnInit {
   ovservSubscribe(){
     this.observSubscribe =   Observable.interval(1000 * 60).subscribe(x => {
     this.getAllReviews();
-    this.getRating(this.currentRatingId);
+    this.getRating(this.oldRatingId);
   });
   }
   ovservUnSubscribe(){
