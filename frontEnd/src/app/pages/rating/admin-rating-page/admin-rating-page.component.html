@@ -34,7 +34,7 @@
     <app-create-rating *ngIf="showCreateForm" (onCancle)="formClose()"
                        (onDatePicked)="createUpdaterating($event)"></app-create-rating>
 
-
+<p></p>
 <md-slide-toggle #observ id="observ"  *ngIf="showRatingInfo" (change)="getAllReviewsObservable($event)" >Verfolgung</md-slide-toggle>
                          
     <app-rating-info *ngIf="showRatingInfo" (changRatingActiveStatus)="updateRatingActiveStatus($event)" 
