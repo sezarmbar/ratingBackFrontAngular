@@ -1,7 +1,7 @@
 package com.sezar.controller;
 
-import com.sezar.entity.Rating;
-import com.sezar.entity.Review;
+import com.sezar.model.Rating;
+import com.sezar.model.Review;
 import com.sezar.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;

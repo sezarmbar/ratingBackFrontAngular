@@ -1,11 +1,12 @@
 package com.sezar.controller;
 
-import com.sezar.entity.Rating;
+import com.sezar.model.Rating;
 import com.sezar.service.RatingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,7 @@ public class RatingController {
 
 
     @GetMapping("all-rating")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<Rating>> getAllArticles() {
         List<Rating> list = ratingService.findAll();
         return new ResponseEntity<List<Rating>>(list, HttpStatus.OK);

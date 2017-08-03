@@ -1,6 +1,6 @@
 package com.sezar.repository;
 
-import com.sezar.entity.Rating;
+import com.sezar.model.Rating;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

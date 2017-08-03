@@ -1,6 +1,6 @@
 package com.sezar.service;
 
-import com.sezar.entity.Rating;
+import com.sezar.model.Rating;
 
 import java.util.List;
 

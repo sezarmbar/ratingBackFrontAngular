@@ -1,4 +1,4 @@
-package com.sezar.entity;
+package com.sezar.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.joda.time.DateTime;

@@ -1,7 +1,7 @@
 package com.sezar.service.impl;
 
 import com.sezar.repository.RatingRepository;
-import com.sezar.entity.Rating;
+import com.sezar.model.Rating;
 import com.sezar.service.RatingService;
 import com.sezar.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;

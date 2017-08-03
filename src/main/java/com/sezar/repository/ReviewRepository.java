@@ -1,7 +1,7 @@
 package com.sezar.repository;
 
-import com.sezar.entity.Rating;
-import com.sezar.entity.Review;
+import com.sezar.model.Rating;
+import com.sezar.model.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
