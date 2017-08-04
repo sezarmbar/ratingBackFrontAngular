@@ -17,25 +17,36 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
-    @Autowired
-    private UserRepository userRepository;
+	@Autowired
+	private UserRepository userRepository;
 
-    @Override
-    @PreAuthorize("hasRole('USER')")
-    public User findByUsername(String username ) throws UsernameNotFoundException {
-        User u = userRepository.findByUsername( username );
-        return u;
-    }
+	@Override
+	@PreAuthorize("hasRole('USER')")
+	public User findByUsername(String username ) throws UsernameNotFoundException {
+		User u = userRepository.findByUsername( username );
+		return u;
+	}
 
-    @PreAuthorize("hasRole('ADMIN')")
-    public User findById(Long id ) throws AccessDeniedException {
-        User u = userRepository.findOne( id );
-        return u;
-    }
+	@PreAuthorize("hasRole('ADMIN')")
+	public User findById(Long id ) throws AccessDeniedException {
+		User u = userRepository.findOne( id );
+		return u;
+	}
 
-    @PreAuthorize("hasRole('ADMIN')")
-    public List<User> findAll() throws AccessDeniedException {
-        List<User> result = userRepository.findAll();
-        return result;
-    }
+	@PreAuthorize("hasRole('ADMIN')")
+	public List<User> findAll() throws AccessDeniedException {
+		List<User> result = userRepository.findAll();
+		return result;
+	}
+
+	@Override
+	public boolean createUser(User user) {
+		try {
+			userRepository.save(user);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
 }

@@ -1,14 +1,21 @@
 package com.sezar.controller;
 
+import com.sezar.model.Review;
 import com.sezar.model.User;
 import com.sezar.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -34,7 +41,17 @@ public class UserController {
     public List<User> loadAll() {
         return this.userService.findAll();
     }
-
+    
+    @PostMapping
+    public ResponseEntity<Void> createUser(@RequestBody User user, UriComponentsBuilder builder) {
+    	boolean flag = userService.createUser(user);
+    	if (flag == false) {
+            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+        }
+    	HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(builder.path("/user?id={id}").buildAndExpand(user.getId()).toUri());
+        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+    }
 
     /*
      *  We are not using userService.findByUsername here(we could),
