@@ -68,6 +68,7 @@ import { HomeComponent } from './home/home.component';
 export function initUserFactory(userService: UserService) {
     return () => userService.initUser();
 }
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -142,6 +143,7 @@ export function initUserFactory(userService: UserService) {
     MdTabsModule,
     MdToolbarModule,
     MdTooltipModule,
+    FlexLayoutModule
   ]
 })
 export class AppModule { }

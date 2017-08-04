@@ -1,41 +1,51 @@
+<div class="content" fxLayout="row" fxLayoutAlign="center">
 
-  
-    <h2>
-     <p class="blocktext"> Bewertung<p>
-    </h2>
-   
-
-<form class="example-form">
-  <table class="example-full-width" cellspacing="0">
-    <tr>
-      <td>
-        <md-input-container class="example-full-width">
-          <input type="string" name="ratingName" #ratingName mdInput placeholder="Bewertung Name" required>
-        </md-input-container>
-      </td>
-      <td>
-        <md-input-container class="example-full-width">
+  <md-card elevation="5" fxFlex>
+    <md-card-subtitle>
+      <h2>Bewertung erstellen</h2>
+    </md-card-subtitle>
+    <md-card-title>
+      <h2>Bewertung</h2>
+    </md-card-title>
+    <form class="example-form">
+      <table class="full-width" cellspacing="0">
+        <tr>
+          <td>
+            <md-input-container class="full-width">
+              <input type="string" name="ratingName" #ratingName mdInput placeholder="Bewertung Name" required>
+            </md-input-container>
+          </td>
+          <td>
+            <md-input-container class="full-width">
+              <input type="string" name="watingTime" #watingTime mdInput placeholder="Warten zeit" required>
+            </md-input-container>
+          </td>
+        </tr>
+      </table>
+      <p>
+        <md-input-container class="full-width">
           <input mdInput #description name="description" placeholder="Info über Bewertung" required>
         </md-input-container>
-      </td>
-    </tr>
-    <tr>
-      <md-slide-toggle #active name="active">
-        <div *ngIf="active.checked">Aktiv</div>
-        <div *ngIf="!active.checked">Deaktiviert</div>
-      </md-slide-toggle>
-    </tr>
-  </table>
+      </p>
+      <p>
+        <section class="active-section">
+          <md-slide-toggle #active name="active">
+            <div *ngIf="active.checked">Aktiv</div>
+            <div *ngIf="!active.checked">Deaktiviert</div>
+          </md-slide-toggle>
+        </section>
+        <p>
+          <table class="full-width" cellspacing="0">
+            <tr>
+              <td>
+                <button md-raised-button type="button" onClick={this.handleCancel} color="accent" (click)="onCansle()">Stornieren</button>
 
-  <table class="example-full-width" cellspacing="0">
-    <tr>
-      <td>
-        <button md-raised-button type="button" onClick={this.handleCancel} color="accent" (click)="onCansle()">Stornieren</button>
-
-      </td>
-      <td class="create-rating-button">
-        <button md-raised-button (click)="readFormData(ratingName,description,active)" color="primary">Erstellen</button>
-      </td>
-    </tr>
-  </table>
-</form>
+              </td>
+              <td>
+                <button md-raised-button (click)="readFormData(ratingName,description,active)" color="primary">Erstellen</button>
+              </td>
+            </tr>
+          </table>
+    </form>
+  </md-card>
+</div>
