@@ -5,7 +5,7 @@ import 'rxjs/Rx';
 import 'rxjs/add/observable/throw';
 
 @Injectable()
-export class ApiService {
+export class ApiService2 {
 
   csrfToken: string;
   headers = new Headers({

@@ -4,14 +4,14 @@ import { RatingService } from '../service/rating.service';
 import { Rating, Review } from "../";
 import { MdDialog, MdDialogRef } from '@angular/material';
 import 'rxjs/add/operator/switchMap';
-import {Observable} from 'rxjs/Rx';
+import { Observable } from 'rxjs/Rx';
 
 @Component({ selector: 'app-rating-page', templateUrl: './rating-page.component.html', styleUrls: ['./rating-page.component.scss'] })
-export class RatingPageComponent implements OnInit  {
+export class RatingPageComponent implements OnInit {
   statusCode: number;
   rating: Rating;
-  ratingObserve:any;
-  currentNameRating:string;
+  ratingObserve: any;
+  currentNameRating: string;
   id: String;
   requestProcessing = false;
   // allRating: Rating[];
@@ -22,7 +22,8 @@ export class RatingPageComponent implements OnInit  {
   review: Review;
   timeout: boolean = true;
   timeoutReview: boolean = false;
-  constructor(public dialog: MdDialog, private ratingService: RatingService, private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(public dialog: MdDialog, private ratingService: RatingService,
+              private router: Router, private activatedRoute: ActivatedRoute) {
 
 
     router.events.subscribe((val: any) => {
@@ -35,15 +36,15 @@ export class RatingPageComponent implements OnInit  {
   ngOnInit() {
     this.getURL();
 
-    this.ratingObserve =   Observable.interval(1000 * 60).subscribe(x => {
+    this.ratingObserve = Observable.interval(1000 * 60).subscribe(x => {
       this.getRatingByName(this.currentNameRating)
-  });
+    });
     //          or
     // this.readIdFromUrl()
   }
 
   getURL() {
-    let name = this
+    const name = this
       .activatedRoute
       .snapshot
       .paramMap

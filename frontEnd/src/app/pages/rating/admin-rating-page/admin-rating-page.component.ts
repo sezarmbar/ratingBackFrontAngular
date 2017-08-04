@@ -1,28 +1,29 @@
-import {Router, ActivatedRoute, Params} from '@angular/router';
-import {OnInit, Component, ViewChild,ElementRef} from '@angular/core';
-import {Rating, Review, RatingService} from "../";
-import {RatingInfoComponent} from "./rating-info/rating-info.component";
-import {Observable} from 'rxjs/Rx';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { OnInit, Component, ViewChild, ElementRef } from '@angular/core';
+import { Rating, Review, RatingService } from '../';
+import { RatingInfoComponent } from './rating-info/rating-info.component';
+import { Observable } from 'rxjs/Rx';
 
-@Component({selector: 'app-admin-rating-page', templateUrl: './admin-rating-page.component.html', styleUrls: ['./admin-rating-page.component.scss']})
+@Component({
+  selector: 'app-admin-rating-page', templateUrl: './admin-rating-page.component.html', styleUrls: ['./admin-rating-page.component.scss'] })
 export class AdminRatingPageComponent implements OnInit {
 
-  showCreateForm : boolean = false;
-  showRatingInfo : boolean = false;
-  statusCode : number;
-  rating : Rating = new Rating(null, null, null, null, null, null, null, null, null, null);
-  id : String = "1";
+  showCreateForm: boolean = false;
+  showRatingInfo: boolean = false;
+  statusCode: number;
+  rating: Rating = new Rating(null, null, null, null, null, null, null, null, null, null);
+  id: String = '1';
   requestProcessing = false;
-  allRating : Rating[];
-  nameRating : string = "new One";
-  description : string = "description for theis";
-  allReviwsForRating : Review[];
-  chartDate : any;
+  allRating: Rating[];
+  nameRating: string = 'new One';
+  description: string = 'description for theis';
+  allReviwsForRating: Review[];
+  chartDate: any;
   oldRatingId;
-  @ViewChild('setReviewData')ReviewData : RatingInfoComponent;
-  observ:boolean=false;
+  @ViewChild('setReviewData') ReviewData: RatingInfoComponent;
+  observ: boolean = false;
   observSubscribe: any;
-  constructor(private ratingService : RatingService, private route : Router, private activatedRoute : ActivatedRoute) {}
+  constructor(private ratingService: RatingService, private route: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.getAllRating();
@@ -33,24 +34,24 @@ export class AdminRatingPageComponent implements OnInit {
     this
       .activatedRoute
       .params
-      .subscribe((params : Params) => {
+      .subscribe((params: Params) => {
         this.id = params['id'];
-        this.getRating(this.id)
-      }, (err) => console.log(err))
+        this.getRating(this.id);
+      }, (err) => console.log(err));
 
   }
 
   createNewRating() {
-    let ratein = new Rating(null, this.nameRating, this.description, "0", "0", "0", "0", "0", null, true)
-    this.createUpdaterating(ratein)
+    const ratein = new Rating(null, this.nameRating, this.description, '0', '0', '0', '0', '0', null, true);
+    this.createUpdaterating(ratein);
   }
 
-  updateRatingActiveStatus(value:boolean):void{
+  updateRatingActiveStatus(value: boolean): void {
     this.rating.active = value;
     this.Updaterating(this.rating);
-    
+
   }
-  Updaterating(rating : Rating) {
+  Updaterating(rating: Rating) {
     this.preProcessConfigurations();
     this
       .ratingService
@@ -61,7 +62,7 @@ export class AdminRatingPageComponent implements OnInit {
       }, (errorCode) => this.statusCode = errorCode);
 
   }
-  createUpdaterating(rating : Rating) {
+  createUpdaterating(rating: Rating) {
     this.preProcessConfigurations();
     this
       .ratingService
@@ -70,7 +71,7 @@ export class AdminRatingPageComponent implements OnInit {
         this.statusCode = successCode;
         this.requestProcessing = false;
         this.getAllRating();
-        this.formClose()
+        this.formClose();
       }, (errorCode) => this.statusCode = errorCode);
 
   }
@@ -95,20 +96,21 @@ export class AdminRatingPageComponent implements OnInit {
         this.requestProcessing = false;
         this.rating = rating;
         this.constructorChartData();
-        if(!this.observ || !(this.oldRatingId == id))
-       { this.getAllReviews(); }
-        this.oldRatingId =id;
+        if (!this.observ || !(this.oldRatingId === id)) {
+          this.getAllReviews();
+        }
+        this.oldRatingId = id;
       }, (errorCode) => this.statusCode = errorCode);
 
   }
 
-  getRatingLocal(rating:Rating){
+  getRatingLocal(rating: Rating) {
     this.infoRating();
     this.rating = rating;
     this.constructorChartData();
     // if(!this.observ || this.oldRatingId != rating.id)
-       { this.getAllReviews(); }
-    this.oldRatingId =rating.id;
+    { this.getAllReviews(); }
+    this.oldRatingId = rating.id;
   }
 
   deletRating(rating) {
@@ -125,28 +127,29 @@ export class AdminRatingPageComponent implements OnInit {
   }
 
 
-  getAllReviewsObservable(value){
-        if (value.checked == true) {
-          this.ovservSubscribe();
-          this.observ = true;
-        } else {
-          this.ovservUnSubscribe();
-          this.observ = false;
-        }
+  getAllReviewsObservable(value) {
+    if (value.checked === true) {
+      this.ovservSubscribe();
+      this.observ = true;
+    } else {
+      this.ovservUnSubscribe();
+      this.observ = false;
+    }
 
   }
-  ovservSubscribe(){
-    this.observSubscribe =   Observable.interval(1000 * 60).subscribe(x => {
-    this.getAllReviews();
-    this.getRating(this.oldRatingId);
-  });
+  ovservSubscribe() {
+    this.observSubscribe = Observable.interval(1000 * 60).subscribe(x => {
+      this.getAllReviews();
+      this.getRating(this.oldRatingId);
+    });
   }
-  ovservUnSubscribe(){
-    if(this.observSubscribe!=undefined)
-    {this.observSubscribe.unsubscribe();}
+  ovservUnSubscribe() {
+    if (this.observSubscribe !== undefined) {
+      this.observSubscribe.unsubscribe();
+    }
   }
-  
-  
+
+
   getAllReviews() {
     this
       .ratingService
@@ -155,46 +158,47 @@ export class AdminRatingPageComponent implements OnInit {
         this.allReviwsForRating = reviews;
         this.infoRating();
         this.setReviewData(reviews);
-      }, (errorCode) => this.statusCode = errorCode)
+      }, (errorCode) => this.statusCode = errorCode);
   }
   setReviewData(reviews) {
-    if (this.ReviewData != undefined) 
-      {this.ReviewData.setReviewData(reviews);}
+    if (this.ReviewData !== undefined) {
+      this.ReviewData.setReviewData(reviews);
     }
+  }
   constructorChartData() {
     this.chartDate = [
       {
-        "name": "schlicht",
-        "value": this.rating.veryBad
+        'name': 'schlicht',
+        'value': this.rating.veryBad
       }, {
-        "name": "unzufrieden",
-        "value": this.rating.bad
+        'name': 'unzufrieden',
+        'value': this.rating.bad
       }, {
-        "name": "normal",
-        "value": this.rating.normal
+        'name': 'normal',
+        'value': this.rating.normal
       }, {
-        "name": "zufrieden",
-        "value": this.rating.god
+        'name': 'zufrieden',
+        'value': this.rating.god
       }, {
-        "name": "glücklich",
-        "value": this.rating.veryGod
+        'name': 'glücklich',
+        'value': this.rating.veryGod
       }
     ];
 
   }
   formClose() {
-    this.showCreateForm = false
+    this.showCreateForm = false;
   }
   formOpen() {
-    this.showCreateForm = true
-    this.showRatingInfo = false
-    this.ovservUnSubscribe()
+    this.showCreateForm = true;
+    this.showRatingInfo = false;
+    this.ovservUnSubscribe();
   }
   infoRating() {
     this.formClose();
-    this.showRatingInfo = true
+    this.showRatingInfo = true;
   }
-  closeInfpRating(){
+  closeInfpRating() {
     this.showRatingInfo = false;
   }
   preProcessConfigurations() {

@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Headers } from '@angular/http';
-import { ApiService } from './api.service';
+import { ApiService2 } from './api.service';
 import { ConfigService } from './config.service';
 
 @Injectable()
 export class AuthService {
 
   constructor(
-    private apiService: ApiService,
+    private apiService: ApiService2,
     private config: ConfigService
   ) { }
 

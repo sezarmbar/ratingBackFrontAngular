@@ -7,56 +7,57 @@ import {
   EventEmitter,
   ViewChild
 } from '@angular/core';
-import {MdDialog, MdDialogRef} from '@angular/material';
+import { MdDialog, MdDialogRef } from '@angular/material';
 
-import {Rating, Review} from "../../";
-import {DataSource} from '@angular/cdk';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {Observable} from 'rxjs/Observable';
+import { Rating, Review } from '../../';
+import { DataSource } from '@angular/cdk';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
 import * as jsPDF from 'jspdf';
 import * as jpt from 'jspdf-autotable';
 
-@Component({selector: 'app-rating-info', templateUrl: './rating-info.component.html', styleUrls: ['./rating-info.component.scss']})
+@Component({ selector: 'app-rating-info', templateUrl: './rating-info.component.html', styleUrls: ['./rating-info.component.scss'] })
 export class RatingInfoComponent implements OnInit {
 
-  @ViewChild('chartContainer')chartContainer : ElementRef;
-  @Input()rating : Rating;
-  @Input()reviews : Review[];
-  @Input()chartDate : any;
-  @Output() changRatingActiveStatus : EventEmitter < any > = new EventEmitter < any > ();
-  @Output() deletRatingId: EventEmitter <any> = new EventEmitter<any> ();
-  checked : boolean = false;
-  showChart : boolean = true;
-  highlights = new Set < string > ();
+  @ViewChild('chartContainer') chartContainer: ElementRef;
+  @Input() rating: Rating;
+  @Input() reviews: Review[];
+  @Input() chartDate: any;
+  @Output() changRatingActiveStatus: EventEmitter<any> = new EventEmitter<any>();
+  @Output() deletRatingId: EventEmitter<any> = new EventEmitter<any>();
+  checked: boolean = false;
+  showChart: boolean = true;
+  highlights = new Set<string>();
   displayedColumns = ['userName'];
   reviewDatabase;
-  dataSource : ReviewDataSource | null;
-  createdAt : string;
-  constructor(public dialog: MdDialog) {}
-  outRatingStatus(data : boolean) : void {
+  dataSource: ReviewDataSource | null;
+  createdAt: string;
+  constructor(public dialog: MdDialog) { }
+  outRatingStatus(data: boolean): void {
     this
       .changRatingActiveStatus
-      .emit(data)
+      .emit(data);
   }
-  deletRating():void {
-    let dialogRef = this.dialog.open(RatingDeleteDialog);
+  deletRating(): void {
+    const dialogRef = this.dialog.open(RatingDeleteDialog);
     dialogRef.afterClosed().subscribe(result => {
-      if(result ==="true")
+      if (result === 'true') {
         this.deletRatingId.emit(this.rating);
-        
+      }
+
     });
   }
 
-  setReviewData(reviews) : void {
+  setReviewData(reviews): void {
     this.checked = this.rating.active;
     this.reviewDatabase = new ReviewDatabase(reviews);
     this.dataSource = new ReviewDataSource(this.reviewDatabase);
     this
       .highlights
-      .add("odd");
+      .add('odd');
     this.convertCreatedAt()
   }
   ngOnInit() {
@@ -65,7 +66,7 @@ export class RatingInfoComponent implements OnInit {
     this.dataSource = new ReviewDataSource(this.reviewDatabase);
     this
       .highlights
-      .add("odd");
+      .add('odd');
     this.convertCreatedAt();
   }
 
@@ -76,13 +77,13 @@ export class RatingInfoComponent implements OnInit {
     this.createdAt = tomonth + '/' + todate + '/' + toyear;
   }
   ceatePDF() {
-    let me = this
+    const me = this
     var doc = new jsPDF();
     var startingPage = doc
       .internal
       .getCurrentPageInfo()
       .pageNumber;
-    let columns = ["SCHLICHT", "UNZUFRIEDEN", "NORMAL", "ZUFRIEDEN", "GLÜCKLICH"]
+    let columns = ['SCHLICHT', 'UNZUFRIEDEN', 'NORMAL', 'ZUFRIEDEN', 'GLÜCKLICH']
     let rows = [
       [this.rating.veryBad, this.rating.bad, this.rating.normal, this.rating.god, this.rating.veryGod]
     ];
@@ -91,9 +92,9 @@ export class RatingInfoComponent implements OnInit {
 
     doc.setFontSize(14);
     doc.setFontType('normal');
-    doc.text("Name: " + this.rating.nameOfRat, 30, 40);
-    doc.text("Beschreibung: " + this.rating.description, 30, 60);
-    doc.text("Hergestellt in: " + this.createdAt, 30, 80);
+    doc.text('Name: ' + this.rating.nameOfRat, 30, 40);
+    doc.text('Beschreibung: ' + this.rating.description, 30, 60);
+    doc.text('Hergestellt in: ' + this.createdAt, 30, 80);
 
     doc.autoTable(columns, rows, {
       startY: 100,
@@ -109,15 +110,15 @@ export class RatingInfoComponent implements OnInit {
     let rowsRev = [];
     for (let rev of this.reviews) {
       let item = rev
-      rowsRev.push({'Reviews': item});
+      rowsRev.push({ 'Reviews': item });
     }
     let columnsRev = [
       {
-        title: "Bewertungen",
-        dataKey: "Reviews"
+        title: 'Bewertungen',
+        dataKey: 'Reviews'
       }
     ]
-    doc.text("Bewertungen", 30, doc.autoTable.previous.finalY + 20);
+    doc.text('Bewertungen', 30, doc.autoTable.previous.finalY + 20);
 
     doc.autoTable(columnsRev, rowsRev, {
       styles: {
@@ -145,7 +146,7 @@ export class RatingInfoComponent implements OnInit {
       }
     });
 
-    doc.setProperties({title: this.rating.nameOfRat, subject: this.rating.description})
+    doc.setProperties({ title: this.rating.nameOfRat, subject: this.rating.description })
     // doc.fromHTML(document.getElementById('chartContainer'),3,4)
     doc.save(this.rating.nameOfRat + '.pdf');
 
@@ -154,21 +155,21 @@ export class RatingInfoComponent implements OnInit {
 }
 
 export interface Reviews {
-  name : string;
+  name: string;
 }
 
 export class ReviewDatabase {
-  dataChange : BehaviorSubject < Reviews[] > = new BehaviorSubject < Reviews[] > ([]);
-  get data() : Reviews[] {
+  dataChange: BehaviorSubject<Reviews[]> = new BehaviorSubject<Reviews[]>([]);
+  get data(): Reviews[] {
     return this.dataChange.value;
   }
-  reviews : [any]
+  reviews: [any]
   constructor(reviews) {
     this.reviews = reviews
-    if(reviews !=undefined)
-    for (let i = 0; i < reviews.length; i++) {
-      this.addUser(i);
-    }
+    if (reviews != undefined)
+      for (let i = 0; i < reviews.length; i++) {
+        this.addUser(i);
+      }
   }
 
   addUser(i) {
@@ -184,19 +185,19 @@ export class ReviewDatabase {
   private createNewUser(i) {
     const name = this.reviews[i];
 
-    return {name: name};
+    return { name: name };
   }
 }
 
-export class ReviewDataSource extends DataSource < any > {
-  constructor(private _ReviewDatabase : ReviewDatabase) {
+export class ReviewDataSource extends DataSource<any> {
+  constructor(private _ReviewDatabase: ReviewDatabase) {
     super();
   }
-  connect() : Observable < Reviews[] > {
+  connect(): Observable<Reviews[]> {
     return this._ReviewDatabase.dataChange;
   }
 
-  disconnect() {}
+  disconnect() { }
 }
 
 
@@ -207,11 +208,11 @@ export class ReviewDataSource extends DataSource < any > {
     <h1 md-dialog-title>Dialog</h1>
     <div md-dialog-content>Möchten Sie diese Bewertung löschen?</div>
     <div md-dialog-actions>
-      <button md-button md-dialog-close="false">Nein</button>
-      <button md-button md-dialog-close="true">Ja</button>
+      <button md-button md-dialog-close='false'>Nein</button>
+      <button md-button md-dialog-close='true'>Ja</button>
     </div>
 `,
 })
 export class RatingDeleteDialog {
-  constructor(public dialogRef: MdDialogRef<RatingDeleteDialog>) {}
+  constructor(public dialogRef: MdDialogRef<RatingDeleteDialog>) { }
 }

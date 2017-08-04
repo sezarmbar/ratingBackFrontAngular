@@ -1,9 +1,7 @@
+import { UserService } from './service/user.service';
+import { LoginGuard } from './guard/login.guard';
 
-import {Component} from '@angular/core';
-
-
-
-declare  var window:any;
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +9,13 @@ declare  var window:any;
   styleUrls: ['./app.component.scss'],
 
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
+  constructor(private loginGuard: LoginGuard, private userService: UserService) { }
 
-
+  ngOnInit() {
+    if (this.userService.currentUser) { console.log('sdafsdf'); this.loginGuard.active = false; }
+  }
 }
 
 

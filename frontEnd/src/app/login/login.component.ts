@@ -1,3 +1,4 @@
+import { LoginGuard } from './../guard/login.guard';
 import { Inject } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -39,7 +40,8 @@ export class LoginComponent implements OnInit {
     private userService: UserService,
     private authService: AuthService,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private loginGuard: LoginGuard
   ) {
 
   }
@@ -65,16 +67,17 @@ export class LoginComponent implements OnInit {
     this.errorDiagnostic = null;
 
     this.authService.login(this.form.value)
-    // show me the animation
-    .delay(1000)
-    .subscribe(data => {
-      this.userService.getMyInfo().subscribe();
-      this.router.navigate(['/']);
-    },
-    error => {
-      this.submitted = false;
-      this.errorDiagnostic = 'Incorrect username or password.';
-    });
+      // show me the animation
+      .delay(1000)
+      .subscribe(data => {
+        this.userService.getMyInfo().subscribe();
+        this.loginGuard.active = false;
+        this.router.navigate(['/admin']);
+      },
+      error => {
+        this.submitted = false;
+        this.errorDiagnostic = 'Incorrect username or password.';
+      });
 
   }
 
