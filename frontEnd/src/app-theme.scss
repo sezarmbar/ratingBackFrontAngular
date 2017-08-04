@@ -1,6 +1,5 @@
 @import '~@angular/material/theming';
 @import '_palette.scss';
-@import 'app/app.component.scss';
 
 // NOTE: Theming is currently experimental and not yet publically released!
 
@@ -11,7 +10,7 @@
   $theme: mat-light-theme($primary, $accent,$warn);
 
   @include angular-material-theme($theme);
-  @include app-navbar-theme($theme);
+
 
 .m2app-dark {
   $dark-primary: mat-palette($mat-oldedark, 700, 500, 900);
@@ -21,7 +20,6 @@
   $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
   
   @include angular-material-theme($dark-theme);
-  @include app-navbar-theme($dark-theme);
 
 }
 
