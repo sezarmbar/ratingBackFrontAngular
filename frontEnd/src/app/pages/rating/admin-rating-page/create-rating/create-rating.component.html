@@ -1,52 +1,44 @@
 <div class="content" fxLayout="row" fxLayoutAlign="center">
 
   <md-card elevation="5" fxFlex>
-    <md-card-subtitle>
-      <h2>Bewertung erstellen</h2>
-    </md-card-subtitle>
+
     <md-card-title>
       <h2>Bewertung</h2>
     </md-card-title>
-    <form class="example-form">
+    <md-card-subtitle>
+      <h2>Bewertung erstellen</h2>
+    </md-card-subtitle>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" #createRating="ngForm">
       <table class="full-width" cellspacing="0">
         <tr>
           <td>
             <div style="color:red" *ngIf="nameError">insert another name</div>
             <md-input-container class="full-width">
-              <input type="string" [errorStateMatcher]="nameError" name="ratingName" #ratingName mdInput placeholder="Bewertung Name" required>
+              <input mdInput formControlName="ratingName" required placeholder="Bewertung Name" required>
             </md-input-container>
           </td>
           <td>
             <md-input-container class="full-width">
-              <input type="string" name="waitingTime" #waitingTime mdInput placeholder="Warten zeit" required>
+              <input mdInput formControlName="waitingTime" type="number" required placeholder="Warten zeit">
             </md-input-container>
           </td>
         </tr>
       </table>
       <p>
         <md-input-container class="full-width">
-          <input mdInput #description name="description" placeholder="Info über Bewertung" required>
+          <input mdInput formControlName="description" placeholder="Info über Bewertung">
         </md-input-container>
       </p>
       <p>
         <section class="active-section">
-          <md-slide-toggle #active name="active">
+          <md-slide-toggle mdInput #active formControlName="active">
             <div *ngIf="active.checked">Aktiv</div>
             <div *ngIf="!active.checked">Deaktiviert</div>
           </md-slide-toggle>
         </section>
         <p>
-          <table class="full-width" cellspacing="0">
-            <tr>
-              <td>
-                <button md-raised-button type="button" onClick={this.handleCancel} color="accent" (click)="onCansle()">Stornieren</button>
-
-              </td>
-              <td>
-                <button md-raised-button (click)="readFormData(ratingName,description,active,waitingTime)" color="primary">Erstellen</button>
-              </td>
-            </tr>
-          </table>
+          <button class="full-width" type="submit" [disabled]="!createRating.form.valid" md-raised-button color="primary">erstellen</button>
     </form>
   </md-card>
 </div>
