@@ -61,7 +61,6 @@ export class LoginComponent implements OnInit {
      */
     this.submitted = true;
     this.errorDiagnostic = null;
-    console.log(this.form.value)
     this.authService.login(this.form.value)
       // show me the animation
       .delay(1000)
