@@ -22,9 +22,9 @@ public class Rating implements Serializable {
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "rating_id")
     private Long ratingId;
-
+    @Column(unique=true)
     private String nameOfRat;
-
+    private int waitingTime;
 
     private String description;
     private String veryBad;
@@ -44,7 +44,7 @@ public class Rating implements Serializable {
     public Rating() {
     }
 
-    public Rating(String nameOfRat, String veryBad, String bad, String normal, String god, String veryGod,String description,boolean active) {
+    public Rating(String nameOfRat, String veryBad, String bad, String normal, String god, String veryGod,String description,boolean active,int waitingTime) {
         this.nameOfRat = nameOfRat;
         this.veryBad = veryBad;
         this.bad = bad;
@@ -53,7 +53,16 @@ public class Rating implements Serializable {
         this.veryGod = veryGod;
         this.description = description;
         this.active = active;
+        this.waitingTime = waitingTime;
 
+    }
+
+    public int getwaitingTime() {
+        return waitingTime;
+    }
+
+    public void setwaitingTime(int waitingTime) {
+        this.waitingTime = waitingTime;
     }
 
     public boolean isActive() {
@@ -150,12 +159,14 @@ public class Rating implements Serializable {
         return "Rating{" +
                 "ratingId=" + ratingId +
                 ", nameOfRat='" + nameOfRat + '\'' +
+                ", waitingTime=" + waitingTime +
                 ", description='" + description + '\'' +
                 ", veryBad='" + veryBad + '\'' +
                 ", bad='" + bad + '\'' +
                 ", normal='" + normal + '\'' +
                 ", god='" + god + '\'' +
                 ", veryGod='" + veryGod + '\'' +
+                ", active=" + active +
                 ", reviews=" + reviews +
                 ", createdAt=" + createdAt +
                 '}';

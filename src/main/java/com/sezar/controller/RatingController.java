@@ -50,7 +50,7 @@ public class RatingController {
 
 
     @PostMapping("rating")
-    public ResponseEntity<Void> createArticle(@RequestBody Rating rating, UriComponentsBuilder builder) {
+    public ResponseEntity<Void> update(@RequestBody Rating rating, UriComponentsBuilder builder) {
         boolean flag = ratingService.createRating(rating);
         if (flag == false) {
             return new ResponseEntity<Void>(HttpStatus.CONFLICT);
@@ -59,6 +59,23 @@ public class RatingController {
         headers.setLocation(builder.path("/rating?id={id}").buildAndExpand(rating.getId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
+
+    @PostMapping("create-rating")
+    public ResponseEntity<Void> createArticle(@RequestBody Rating rating, UriComponentsBuilder builder) {
+        boolean flag = ratingService.isRatinExist(rating.getNameOfRat());
+        if(flag){
+            return new ResponseEntity<Void>(HttpStatus.NOT_ACCEPTABLE);}
+        else{
+            flag =ratingService.createRating(rating);
+        }
+        if(!flag){
+            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+        }
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(builder.path("/rating?id={id}").buildAndExpand(rating.getId()).toUri());
+        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+    }
+
 
     @PostMapping("delete-rating")
     public ResponseEntity<Void> deleteRating(@RequestBody Rating rating) {

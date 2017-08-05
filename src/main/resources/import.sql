@@ -8,8 +8,8 @@ INSERT INTO user_authority (user_id, authority_id) VALUES (1, 1);
 INSERT INTO user_authority (user_id, authority_id) VALUES (2, 1);
 INSERT INTO user_authority (user_id, authority_id) VALUES (2, 2);
 
-INSERT INTO rating (rating_id, bad, god, name_of_rat, normal, very_bad, very_god,active) VALUES (1, '5', '4', 'first', '5', '6', '7',TRUE );
-INSERT INTO rating (rating_id, bad, god, name_of_rat, normal, very_bad, very_god,active) VALUES (2, '5', '2', 'second', '2', '4', '4',TRUE );
+INSERT INTO rating (rating_id, bad, god, name_of_rat, normal, very_bad, very_god,active,waiting_time) VALUES (1, '5', '4', 'first', '5', '6', '7',TRUE ,44);
+INSERT INTO rating (rating_id, bad, god, name_of_rat, normal, very_bad, very_god,active,waiting_time) VALUES (2, '5', '2', 'second', '2', '4', '4',TRUE,44 );
 
 
 INSERT INTO review (review_text, rating_id) VALUES ('aaaaaaaaaaaaaaaaaaaaa', '1');

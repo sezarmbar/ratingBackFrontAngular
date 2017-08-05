@@ -55,4 +55,14 @@ public class RatingServiceImpl implements RatingService {
         reviewService.deleteReviewByRating(rating);
         ratingRepository.delete(rating);
     }
+
+    @Override
+    public boolean isRatinExist(String nameOfRat) {
+        boolean flag;
+        Rating rating = ratingRepository.findByNameOfRat(nameOfRat);
+        if( rating != null ) {
+            flag = true;
+        }else {flag = false;}
+        return flag;
+    }
 }
