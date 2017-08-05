@@ -96,7 +96,6 @@ export class RatingService {
       .catch(this.handleError);
   }
   createRating(rating : Rating) : Observable < number > {
-    console.log(rating);
     let cpHeaders = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: cpHeaders});
     return this
@@ -132,7 +131,7 @@ export class RatingService {
   }
 
   private handleError(error : Response | any) {
-    console.error(error.message || error);
+    // console.error(error.message || error);
     return Observable.throw(error.status);
   }
 
