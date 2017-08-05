@@ -20,7 +20,7 @@ import 'rxjs/add/observable/interval';
 })
 export class LoginComponent implements OnInit {
   title = 'Login';
-  githubLink = 'https://github.com/bfwg/angular-spring-starter';
+
   form: FormGroup;
 
   /**
@@ -55,17 +55,13 @@ export class LoginComponent implements OnInit {
 
   }
 
-  repository() {
-    window.location.href = this.githubLink;
-  }
-
   onSubmit() {
     /**
      * Innocent until proven guilty
      */
     this.submitted = true;
     this.errorDiagnostic = null;
-
+    console.log(this.form.value)
     this.authService.login(this.form.value)
       // show me the animation
       .delay(1000)
