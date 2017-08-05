@@ -33,6 +33,7 @@ export class RatingInfoComponent implements OnInit {
   highlights = new Set<string>();
   displayedColumns = ['userName'];
   reviewDatabase;
+  EnablePdfButton:boolean = true;
   dataSource: ReviewDataSource | null;
   createdAt: string;
   constructor(public dialog: MdDialog) { }
@@ -58,16 +59,15 @@ export class RatingInfoComponent implements OnInit {
     this
       .highlights
       .add('odd');
-    this.convertCreatedAt()
+    this.convertCreatedAt();
+    if(reviews.length > 0){
+      this.EnablePdfButton = false;
+    }else{
+      this.EnablePdfButton = true;
+    }
   }
   ngOnInit() {
-    this.checked = this.rating.active;
-    this.reviewDatabase = new ReviewDatabase(this.reviews);
-    this.dataSource = new ReviewDataSource(this.reviewDatabase);
-    this
-      .highlights
-      .add('odd');
-    this.convertCreatedAt();
+    this.setReviewData(this.reviews);
   }
 
   convertCreatedAt() {
