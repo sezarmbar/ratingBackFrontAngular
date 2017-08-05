@@ -45,7 +45,7 @@ export class AdminRatingPageComponent implements OnInit {
   }
 
   createNewRating() {
-    const ratein = new Rating(null, this.nameRating, this.description, '0', '0', '0', '0', '0', null, true,this.waitingTime);
+    const ratein = new Rating(null, this.nameRating, this.description, 0, 0, 0, 0, 0, null, true,this.waitingTime);
     this.createRating(ratein);
   }
 
