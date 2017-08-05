@@ -28,7 +28,7 @@ export class CreateRatingComponent implements OnInit {
 onSubmit(){
   this.submitted = true;
   const creatRD = this.form.value;
-  this.rating = new Rating(null,creatRD.ratingName,creatRD.description,"0","0","0","0","0",null,creatRD.active,creatRD.waitingTime);
+  this.rating = new Rating(null,creatRD.ratingName,creatRD.description,0,0,0,0,0,null,creatRD.active,creatRD.waitingTime);
   this.onDatePicked.emit(this.rating);
 }
 

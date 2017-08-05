@@ -145,7 +145,7 @@ export class AdminRatingPageComponent implements OnInit {
 
   }
   ovservSubscribe() {
-    this.observSubscribe = Observable.interval(1000 * 60).subscribe(x => {
+    this.observSubscribe = Observable.interval(this.rating.waitingTime * 60000).subscribe(x => {
       this.getAllReviews();
       this.getRating(this.oldRatingId);
     });

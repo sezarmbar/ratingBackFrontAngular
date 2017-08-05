@@ -88,13 +88,13 @@ export class RatingPageComponent implements OnInit {
     if (this.timeout) {
       let rat = event.target.id;
       let tmpValue = this.rating[rat];
-      tmpValue = (parseInt(tmpValue) + 1)
+      tmpValue = ((tmpValue) + 1)
       this.rating[rat] = tmpValue
       this.timeout = false;
       this.onAddOrUpdateRate(this.rating);
       if (rat === "bad" || rat === "veryBad")
         this.timeoutReview = true;
-      setTimeout(() => this.timeout = true, 1000 * 60);
+      setTimeout(() => this.timeout = true, this.rating.waitingTime * 60000);
     }
 
   }

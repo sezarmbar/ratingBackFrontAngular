@@ -24,15 +24,16 @@ public class Rating implements Serializable {
     private Long ratingId;
     @Column(unique=true)
     private String nameOfRat;
-    private int waitingTime;
+    private float waitingTime;
 
     private String description;
-    private String veryBad;
-    private String bad;
-    private String normal;
-    private String god;
-    private String veryGod;
     private boolean active;
+
+    private int veryBad;
+    private int bad;
+    private int normal;
+    private int god;
+    private int veryGod;
 
     @OneToMany(mappedBy = "rating",fetch = FetchType.LAZY)
     @JsonIgnore
@@ -44,7 +45,7 @@ public class Rating implements Serializable {
     public Rating() {
     }
 
-    public Rating(String nameOfRat, String veryBad, String bad, String normal, String god, String veryGod,String description,boolean active,int waitingTime) {
+    public Rating(String nameOfRat, int veryBad, int bad, int normal, int god, int veryGod,String description,boolean active,float waitingTime) {
         this.nameOfRat = nameOfRat;
         this.veryBad = veryBad;
         this.bad = bad;
@@ -57,11 +58,11 @@ public class Rating implements Serializable {
 
     }
 
-    public int getwaitingTime() {
+    public float getwaitingTime() {
         return waitingTime;
     }
 
-    public void setwaitingTime(int waitingTime) {
+    public void setwaitingTime(float waitingTime) {
         this.waitingTime = waitingTime;
     }
 
@@ -97,43 +98,43 @@ public class Rating implements Serializable {
         this.nameOfRat = nameOfRat;
     }
 
-    public String getVeryBad() {
+    public int getVeryBad() {
         return veryBad;
     }
 
-    public void setVeryBad(String veryBad) {
+    public void setVeryBad(int veryBad) {
         this.veryBad = veryBad;
     }
 
-    public String getBad() {
+    public int getBad() {
         return bad;
     }
 
-    public void setBad(String bad) {
+    public void setBad(int bad) {
         this.bad = bad;
     }
 
-    public String getNormal() {
+    public int getNormal() {
         return normal;
     }
 
-    public void setNormal(String normal) {
+    public void setNormal(int normal) {
         this.normal = normal;
     }
 
-    public String getGod() {
+    public int getGod() {
         return god;
     }
 
-    public void setGod(String god) {
+    public void setGod(int god) {
         this.god = god;
     }
 
-    public String getVeryGod() {
+    public int getVeryGod() {
         return veryGod;
     }
 
-    public void setVeryGod(String veryGod) {
+    public void setVeryGod(int veryGod) {
         this.veryGod = veryGod;
     }
 
