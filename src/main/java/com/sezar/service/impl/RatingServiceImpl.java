@@ -34,6 +34,9 @@ public class RatingServiceImpl implements RatingService {
 
     @Override
     public boolean createRating(Rating rating) {
+        if(isRatinExist(rating.getNameOfRat())){
+            return false;
+        }
          ratingRepository.save(rating);
         return true;
     }
@@ -58,11 +61,8 @@ public class RatingServiceImpl implements RatingService {
 
     @Override
     public boolean isRatinExist(String nameOfRat) {
-        boolean flag;
         Rating rating = ratingRepository.findByNameOfRat(nameOfRat);
-        if( rating != null ) {
-            flag = true;
-        }else {flag = false;}
-        return flag;
+        if( rating != null ) {return true;}
+                        else {return false;}
     }
 }
