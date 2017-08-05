@@ -11,13 +11,14 @@
       <table class="full-width" cellspacing="0">
         <tr>
           <td>
+            <div style="color:red" *ngIf="nameError">insert another name</div>
             <md-input-container class="full-width">
-              <input type="string" name="ratingName" #ratingName mdInput placeholder="Bewertung Name" required>
+              <input type="string" [errorStateMatcher]="nameError" name="ratingName" #ratingName mdInput placeholder="Bewertung Name" required>
             </md-input-container>
           </td>
           <td>
             <md-input-container class="full-width">
-              <input type="string" name="watingTime" #watingTime mdInput placeholder="Warten zeit" required>
+              <input type="string" name="waitingTime" #waitingTime mdInput placeholder="Warten zeit" required>
             </md-input-container>
           </td>
         </tr>
@@ -42,7 +43,7 @@
 
               </td>
               <td>
-                <button md-raised-button (click)="readFormData(ratingName,description,active)" color="primary">Erstellen</button>
+                <button md-raised-button (click)="readFormData(ratingName,description,active,waitingTime)" color="primary">Erstellen</button>
               </td>
             </tr>
           </table>

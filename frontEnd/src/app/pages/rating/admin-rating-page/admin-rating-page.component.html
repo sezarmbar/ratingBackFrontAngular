@@ -29,14 +29,14 @@
     <md-icon>menu</md-icon>
   </button>
   <div class="admin-scrolling-content">
-    <div class="admin-content-title"></div>
+    <!-- <div class="admin-content-title"></div> -->
 
-    <app-create-rating *ngIf="showCreateForm" (onCancle)="formClose()" (onDatePicked)="createUpdaterating($event)"></app-create-rating>
+    <app-create-rating *ngIf="showCreateForm" (onCancle)="formClose()" [nameError]="nameError" (onDatePicked)="createRating($event)"></app-create-rating>
 
-    <p></p>
-    <md-slide-toggle #observ id="observ" *ngIf="showRatingInfo" (change)="getAllReviewsObservable($event)">Verfolgung</md-slide-toggle>
+    
+      <md-slide-toggle class="verfolgung" #observ id="observ" *ngIf="showRatingInfo" (change)="getAllReviewsObservable($event)">Verfolgung</md-slide-toggle>
 
     <app-rating-info *ngIf="showRatingInfo" (changRatingActiveStatus)="updateRatingActiveStatus($event)" (deletRatingId)="deletRating($event)"
-      [rating]="rating" [reviews]="allReviwsForRating" [chartDate]="chartDate" #setReviewData></app-rating-info>
+      [rating]="rating" [reviews]="allReviwsForRating" [chartDate]="chartDate"  #setReviewData></app-rating-info>
   </div>
 </md-sidenav-container>

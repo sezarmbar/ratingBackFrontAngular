@@ -1,10 +1,10 @@
 {
-  "name": "parkhaus",
-  "version": "0.0.0",
+  "name": "rating",
+  "version": "1.0.1",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.conf.json --port 4201",
+    "start": "ng serve --proxy-config proxy.conf.json --port 4200",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

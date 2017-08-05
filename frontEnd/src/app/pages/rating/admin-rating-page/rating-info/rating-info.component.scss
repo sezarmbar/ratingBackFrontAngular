@@ -39,6 +39,29 @@
  text-align: center;
 }
 th, td {
-    border-bottom: 1px solid #ddd;
+    // border-bottom: 1px solid #ddd;
 }
-img.Image { max-width: 20px;}
+img.Image { max-width: 25px;}
+ .md-contener-info{
+   margin: 10px 10px 10px 10px;
+ }
+@media screen and (max-width: 599px) {
+
+  .content {
+    /* https://github.com/angular/flex-layout/issues/295 */
+    display: block !important;
+  }
+}
+.full-width {
+  width: 100%;
+}
+md-card {
+  // max-width: 850px;
+  min-width: 300px;
+  text-align: center;
+  animation: fadein 1s;
+  -o-animation: fadein 1s; /* Opera */
+  -moz-animation: fadein 1s; /* Firefox */
+  -webkit-animation: fadein 1s; /* Safari and Chrome */
+
+}

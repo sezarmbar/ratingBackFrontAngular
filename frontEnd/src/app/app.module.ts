@@ -92,7 +92,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     UserService,
     FooService,
     ConfigService,
-  ,
     {
       'provide': APP_INITIALIZER,
       'useFactory': initUserFactory,
