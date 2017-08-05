@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
-import { Http, Response, Headers, URLSearchParams, RequestOptions } from '@angular/http';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {Http, Response, Headers, URLSearchParams, RequestOptions} from '@angular/http';
+import {Observable} from 'rxjs';
 
-import { Rating, Review } from '../';
+import {Rating, Review} from '../';
 @Injectable()
 export class RatingService {
   adress = '';
-  // adress = 'http://localhost:8080/rating-app'
-  // adress = '/rating-app'
+  // adress = 'http://localhost:8080/rating-app' adress = '/rating-app'
 
+  creattRating = this.adress + '/api/create-rating';
   rating = this.adress + '/api/rating';
   deleteRating = this.adress + '/api/delete-rating';
 
@@ -19,22 +19,19 @@ export class RatingService {
 
   review = this.adress + '/api/review';
 
-
   private _auth_url = '/auth';
-
 
   login_url = this._auth_url + '/login';
 
   logout_url = this._auth_url + '/logout';
 
-  constructor(private http: Http) {
-  }
+  constructor(private http : Http) {}
 
   // Review --------
 
-  getAllReviews(rating: Rating): Observable<Review[]> {
-    const cpHeaders = new Headers({ 'Content-Type': 'application/json' });
-    const options = new RequestOptions({ headers: cpHeaders });
+  getAllReviews(rating : Rating) : Observable < Review[] > {
+    const cpHeaders = new Headers({'Content-Type': 'application/json'});
+    const options = new RequestOptions({headers: cpHeaders});
 
     return this
       .http
@@ -44,9 +41,9 @@ export class RatingService {
 
   }
 
-  putReview(review: Review): Observable<number> {
-    let cpHeaders = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: cpHeaders });
+  putReview(review : Review) : Observable < number > {
+    let cpHeaders = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: cpHeaders});
     return this
       .http
       .post(this.review, review, options)
@@ -56,7 +53,7 @@ export class RatingService {
 
   // Rating ------------
 
-  getAllRatings(): Observable<Rating[]> {
+  getAllRatings() : Observable < Rating[] > {
     return this
       .http
       .get(this.allrating)
@@ -65,11 +62,11 @@ export class RatingService {
 
   }
 
-  getRatingById(id: string): Observable<Rating> {
-    let cpHeaders = new Headers({ 'Content-Type': 'application/json' });
+  getRatingById(id : string) : Observable < Rating > {
+    let cpHeaders = new Headers({'Content-Type': 'application/json'});
     let cpParams = new URLSearchParams();
     cpParams.set('id', id);
-    let options = new RequestOptions({ headers: cpHeaders, params: cpParams });
+    let options = new RequestOptions({headers: cpHeaders, params: cpParams});
     return this
       .http
       .get(this.rating, options)
@@ -77,11 +74,11 @@ export class RatingService {
       .catch(this.handleError);
   }
 
-  getRatingByName(name: string): Observable<Rating> {
-    let cpHeaders = new Headers({ 'Content-Type': 'application/json' });
+  getRatingByName(name : string) : Observable < Rating > {
+    let cpHeaders = new Headers({'Content-Type': 'application/json'});
     let cpParams = new URLSearchParams();
     cpParams.set('name', name);
-    let options = new RequestOptions({ headers: cpHeaders, params: cpParams });
+    let options = new RequestOptions({headers: cpHeaders, params: cpParams});
     return this
       .http
       .get(this.ratingByName, options)
@@ -89,51 +86,52 @@ export class RatingService {
       .catch(this.handleError);
   }
 
-  putRating(rating: Rating): Observable<number> {
-    let cpHeaders = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: cpHeaders });
+  putRating(rating : Rating) : Observable < number > {
+    let cpHeaders = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: cpHeaders});
     return this
       .http
       .post(this.rating, rating, options)
       .map(success => success.status)
       .catch(this.handleError);
   }
+  createRating(rating : Rating) : Observable < number > {
+    console.log(rating);
+    let cpHeaders = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: cpHeaders});
+    return this
+      .http
+      .post(this.creattRating, rating, options)
+      .map(success => success.status)
+      .catch(this.handleError);
+  }
 
-  // deleteRatingById(id: string): Observable < number > {
-  //   let cpHeaders = new Headers({'Content-Type': 'application/json'});
-  //   let cpParams = new URLSearchParams();
-  //   cpParams.set('id', id);
-  //   let options = new RequestOptions({headers: cpHeaders, params: cpParams});
-  //   return this
-  //     .http
-  //     .delete(this.rating, options)
-  //     .map(success => success.status)
-  //     .catch(this.handleError);
-  // }
+  // deleteRatingById(id: string): Observable < number > {   let cpHeaders = new
+  // Headers({'Content-Type': 'application/json'});   let cpParams = new
+  // URLSearchParams();   cpParams.set('id', id);   let options = new
+  // RequestOptions({headers: cpHeaders, params: cpParams});   return this
+  // .http     .delete(this.rating, options)     .map(success => success.status)
+  //   .catch(this.handleError); }
 
-  deleteRatingByRating(rating: Rating): Observable<number> {
-    let cpHeaders = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: cpHeaders });
+  deleteRatingByRating(rating : Rating) : Observable < number > {
+    let cpHeaders = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: cpHeaders});
     return this
       .http
       .post(this.deleteRating, rating, options)
       .map(success => success.status)
       .catch(this.handleError);
   }
-  // login(user) {
-  //   const body = `username='admin'&password='123'`;
-  //   const headers = new Headers();
-  //   headers.append('Content-Type', 'application/x-www-form-urlencoded');
-  //   return this.apiService.post(this.login_url, body, headers);
-  // }
-
-  // Utils -------------
-  private extractData(res: Response) {
+  // login(user) {   const body = `username='admin'&password='123'`;   const
+  // headers = new Headers();   headers.append('Content-Type',
+  // 'application/x-www-form-urlencoded');   return
+  // this.apiService.post(this.login_url, body, headers); } Utils -------------
+  private extractData(res : Response) {
     let body = res.json();
     return body;
   }
 
-  private handleError(error: Response | any) {
+  private handleError(error : Response | any) {
     console.error(error.message || error);
     return Observable.throw(error.status);
   }
