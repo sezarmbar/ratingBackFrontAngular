@@ -1,0 +1,66 @@
+<div class="content" fxLayout="row" fxLayoutAlign="center">
+
+  <md-card>
+
+    <md-card-title>
+      <h2>Benutzer erstellen</h2>
+    </md-card-title>
+
+    <form class="form">
+
+
+      <table class="full-width" cellspacing="0">
+        <tr>
+          <td>
+            <md-input-container class="full-width">
+              <input mdInput placeholder="Vor Name">
+            </md-input-container>
+          </td>
+          <td>
+            <md-input-container class="full-width">
+              <input mdInput placeholder="Nach Name">
+            </md-input-container>
+          </td>
+        </tr>
+      </table>
+      <p>
+        <table class="full-width" cellspacing="0">
+          <tr>
+            <td>
+              <md-input-container class="full-width">
+                <input mdInput placeholder="Benutzer">
+              </md-input-container>
+            </td>
+            <td>
+              <md-input-container class="full-width">
+                <input mdInput placeholder="Passwort" [type]="showPassword.checked ? 'text' : 'password'">
+              </md-input-container>
+            </td>
+            <td>
+              <md-checkbox #showPassword>
+                <h5> Passwort anzeigen</h5>
+              </md-checkbox>
+            </td>
+          </tr>
+        </table>
+        <p>
+          <table class="full-width" cellspacing="0">
+            <tr>
+              <td>
+                <md-checkbox  #User>
+                  <h5> User</h5>
+                </md-checkbox>
+              </td>
+              <td>
+                <md-checkbox #Admin>
+                  <h5> Admin</h5>
+                </md-checkbox>
+              </td>
+             
+            </tr>
+          </table>
+    </form>
+  </md-card>
+
+
+</div>

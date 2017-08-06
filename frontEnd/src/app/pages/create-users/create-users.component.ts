@@ -11,6 +11,7 @@ import { RatingService } from "../rating";
 })
 export class CreateUsersComponent implements OnInit {
 
+  showCreateForm: boolean = true;
 
   constructor( private http: Http, private ratignService: RatingService) {
   }

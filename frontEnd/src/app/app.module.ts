@@ -70,6 +70,7 @@ export function initUserFactory(userService: UserService) {
 }
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CreateUsersComponent } from './pages/create-users';
+import { CreateFormComponent } from './pages/create-users/create-form/create-form.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,8 @@ import { CreateUsersComponent } from './pages/create-users';
     ErrorPageComponent,
     LoginComponent,
     HomeComponent,
-    CreateUsersComponent
+    CreateUsersComponent,
+    CreateFormComponent
   ],
   entryComponents: [RatingDeleteDialog, DialogReviewEnter],
   providers: [RatingService, ApiService, ApiService2, LoginGuard,

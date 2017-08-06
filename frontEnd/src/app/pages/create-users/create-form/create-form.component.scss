@@ -1,0 +1,17 @@
+md-card {
+  max-width: 600px;
+  text-align: center;
+  animation: fadein 1s;
+  -o-animation: fadein 1s; /* Opera */
+  -moz-animation: fadein 1s; /* Firefox */
+  -webkit-animation: fadein 1s; /* Safari and Chrome */
+
+}
+
+.content{
+    padding-top: 40px;
+}
+
+.full-width {
+  width: 100%;
+}
