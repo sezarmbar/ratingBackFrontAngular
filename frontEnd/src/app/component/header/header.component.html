@@ -4,6 +4,9 @@
   </button>
 
   <div class="right">
+    <button  routerLink="/creatUsers" md-button md-ripple>
+      <span> Benutzer erstellen</span>
+    </button>
     <button *ngIf="!hasSignedIn()" routerLink="/login" md-button md-ripple>
       <span>Login</span>
     </button>
