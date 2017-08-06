@@ -12,7 +12,7 @@
       <tr>
         <td>
           <md-input-container>
-            <input mdInput placeholder="Warten zeit" value="{{rating.waitingTime}}">
+            <input mdInput (ngModel)="waitingTime" (change)="waitingTimeOnChange(inputWaitingTime.value)" #inputWaitingTime placeholder="Warten zeit" value="{{rating.waitingTime}}">
           </md-input-container>
         </td>
         <td style="width:50%">

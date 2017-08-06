@@ -26,8 +26,10 @@ export class RatingInfoComponent implements OnInit {
   @Input() rating: Rating;
   @Input() reviews: Review[];
   @Input() chartDate: any;
-  @Output() changRatingActiveStatus: EventEmitter<any> = new EventEmitter<any>();
+  @Output() updateRating: EventEmitter<Rating> = new EventEmitter<Rating>();
   @Output() deletRatingId: EventEmitter<any> = new EventEmitter<any>();
+
+
   checked: boolean = false;
   showChart: boolean = true;
   highlights = new Set<string>();
@@ -36,11 +38,15 @@ export class RatingInfoComponent implements OnInit {
   EnablePdfButton:boolean = true;
   dataSource: ReviewDataSource | null;
   createdAt: string;
+  waitingTime;
   constructor(public dialog: MdDialog) { }
   outRatingStatus(data: boolean): void {
-    this
-      .changRatingActiveStatus
-      .emit(data);
+    this.rating.active = data;
+    this.updateRating.emit(this.rating);
+  }
+  waitingTimeOnChange(value){
+    this.rating.waitingTime = value;
+    this.updateRating.emit(this.rating);
   }
   deletRating(): void {
     const dialogRef = this.dialog.open(RatingDeleteDialog);
@@ -76,6 +82,7 @@ export class RatingInfoComponent implements OnInit {
     let toyear = new Date(this.rating.createdAt).getFullYear();
     this.createdAt = tomonth + '/' + todate + '/' + toyear;
   }
+  
   ceatePDF() {
     const me = this
     var doc = new jsPDF();

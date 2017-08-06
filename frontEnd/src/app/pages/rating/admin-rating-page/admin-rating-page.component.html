@@ -36,7 +36,7 @@
     
       <md-slide-toggle class="verfolgung" #observ id="observ" *ngIf="showRatingInfo" (change)="getAllReviewsObservable($event)">Verfolgung</md-slide-toggle>
 
-    <app-rating-info *ngIf="showRatingInfo" (changRatingActiveStatus)="updateRatingActiveStatus($event)" (deletRatingId)="deletRating($event)"
+    <app-rating-info *ngIf="showRatingInfo" (updateRating)="updateRating($event)" (deletRatingId)="deletRating($event)"
       [rating]="rating" [reviews]="allReviwsForRating" [chartDate]="chartDate"  #setReviewData></app-rating-info>
   </div>
 </md-sidenav-container>

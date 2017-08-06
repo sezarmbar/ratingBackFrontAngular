@@ -49,10 +49,8 @@ export class AdminRatingPageComponent implements OnInit {
     this.createRating(ratein);
   }
 
-  updateRatingActiveStatus(value: boolean): void {
-    this.rating.active = value;
-    this.Updaterating(this.rating);
-
+  updateRating(rating: Rating): void {
+    this.Updaterating(rating);
   }
   Updaterating(rating: Rating) {
     this.preProcessConfigurations();
