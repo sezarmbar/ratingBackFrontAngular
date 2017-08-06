@@ -27,7 +27,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping( method = GET, value = "/{userId}" )
+    @GetMapping("/{userId}" )
     public User loadById(@PathVariable Long userId ) {
         return this.userService.findById( userId );
     }
@@ -46,6 +46,15 @@ public class UserController {
     	HttpHeaders headers = new HttpHeaders();
         headers.setLocation(builder.path("/user?id={id}").buildAndExpand(user.getId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+    }
+
+    @PostMapping("delete-user")
+    public ResponseEntity<Void> deleteRating(@RequestBody User user) {
+        boolean flag = userService.deleteUser(user);
+        if(flag){
+            return new ResponseEntity<Void>(HttpStatus.EXPECTATION_FAILED);
+        }
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
     /*

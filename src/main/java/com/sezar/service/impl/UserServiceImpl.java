@@ -49,4 +49,12 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+	@Override
+	public boolean deleteUser(User user) {
+		if(findByUsername(user.getUsername())==null){
+			return false;
+		}
+		userRepository.delete(user);
+		return true;
+	}
 }
