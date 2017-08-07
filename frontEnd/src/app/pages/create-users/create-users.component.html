@@ -9,7 +9,12 @@
           <md-icon>close</md-icon>
         </button>
       </md-toolbar>
-     
+      <md-list>
+        <md-list-item *ngFor="let user of allUsers">
+          <a md-button class="button-rating" >{{user.firstname}}</a>
+        </md-list-item>
+
+      </md-list>
     </div>
 
 
@@ -18,6 +23,6 @@
     <md-icon>menu</md-icon>
   </button>
   <div class="create-user-scrolling-content">
-    <user-create-form *ngIf="showCreateForm">  </user-create-form>
+    <user-create-form *ngIf="showCreateForm" (onDatePicked)="createUser($event)"> </user-create-form>
   </div>
 </md-sidenav-container>

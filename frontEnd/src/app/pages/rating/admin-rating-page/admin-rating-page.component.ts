@@ -5,24 +5,25 @@ import { RatingInfoComponent } from './rating-info/rating-info.component';
 import { Observable } from 'rxjs/Rx';
 
 @Component({
-  selector: 'app-admin-rating-page', templateUrl: './admin-rating-page.component.html', styleUrls: ['./admin-rating-page.component.scss'] })
+  selector: 'app-admin-rating-page', templateUrl: './admin-rating-page.component.html', styleUrls: ['./admin-rating-page.component.scss']
+})
 export class AdminRatingPageComponent implements OnInit {
 
   showCreateForm: boolean = false;
   showRatingInfo: boolean = false;
   statusCode: number;
-  rating: Rating = new Rating(null, null, null, null, null, null, null, null, null, null,null);
+  rating: Rating = new Rating(null, null, null, null, null, null, null, null, null, null, null);
   id: String = '1';
   requestProcessing = false;
   allRating: Rating[];
   nameRating: string = 'new One';
   description: string = 'description for theis';
-  waitingTime:number = 50;
+  waitingTime: number = 50;
   allReviwsForRating: Review[];
   chartDate: any;
   oldRatingId;
 
-  nameError:boolean =false;
+  nameError: boolean = false;
   @ViewChild('setReviewData') ReviewData: RatingInfoComponent;
   observ: boolean = false;
   observSubscribe: any;
@@ -45,7 +46,7 @@ export class AdminRatingPageComponent implements OnInit {
   }
 
   createNewRating() {
-    const ratein = new Rating(null, this.nameRating, this.description, 0, 0, 0, 0, 0, null, true,this.waitingTime);
+    const ratein = new Rating(null, this.nameRating, this.description, 0, 0, 0, 0, 0, null, true, this.waitingTime);
     this.createRating(ratein);
   }
 
@@ -74,9 +75,10 @@ export class AdminRatingPageComponent implements OnInit {
         this.getAllRating();
         this.formClose();
         this.nameError = false;
-      }, (errorCode) =>{ 
-        if(errorCode===406)
+      }, (errorCode) => {
+        if (errorCode === 406) {
           this.nameError = true;
+        }
       });
 
   }

@@ -6,57 +6,60 @@
       <h2>Benutzer erstellen</h2>
     </md-card-title>
 
-    <form class="form">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" #createUserForm="ngForm">
 
 
       <table class="full-width" cellspacing="0">
         <tr>
           <td>
             <md-input-container class="full-width">
-              <input mdInput placeholder="Vor Name">
+              <input mdInput formControlName="name" placeholder="Vor Name">
             </md-input-container>
           </td>
           <td>
             <md-input-container class="full-width">
-              <input mdInput placeholder="Nach Name">
+              <input mdInput formControlName="lastname"  placeholder="Nach Name">
             </md-input-container>
           </td>
+          <td class="width-20">
+            <md-checkbox formControlName="admin" #Admin>
+              Admin
+            </md-checkbox>
+          </td>
+
         </tr>
       </table>
       <p>
         <table class="full-width" cellspacing="0">
           <tr>
             <td>
-              <md-input-container class="full-width">
-                <input mdInput placeholder="Benutzer">
+              <md-input-container  class="full-width">
+                <input mdInput formControlName="username" placeholder="Benutzer">
               </md-input-container>
             </td>
             <td>
               <md-input-container class="full-width">
-                <input mdInput placeholder="Passwort" [type]="showPassword.checked ? 'text' : 'password'">
+                <input mdInput formControlName="password" placeholder="Passwort" [type]="showPassword.checked ? 'text' : 'password'">
               </md-input-container>
             </td>
-            <td>
-              <md-checkbox #showPassword>
-                <h5> Passwort anzeigen</h5>
+            <td class="width-20">
+              <md-checkbox  #showPassword>
+                anzeigen
               </md-checkbox>
             </td>
           </tr>
         </table>
         <p>
+          <button class="full-width" type="submit" [disabled]="!createUserForm.form.valid" md-raised-button color="primary">erstellen</button>
           <table class="full-width" cellspacing="0">
             <tr>
               <td>
-                <md-checkbox  #User>
-                  <h5> User</h5>
-                </md-checkbox>
+              
               </td>
               <td>
-                <md-checkbox #Admin>
-                  <h5> Admin</h5>
-                </md-checkbox>
+              
               </td>
-             
+
             </tr>
           </table>
     </form>

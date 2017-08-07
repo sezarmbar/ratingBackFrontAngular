@@ -49,7 +49,7 @@ import {
 } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk';
 // service
-import { RatingPageComponent, RatingService, ApiService, DialogReviewEnter, AdminRatingPageComponent } from './pages/rating';
+import { RatingPageComponent, RatingService,  DialogReviewEnter, AdminRatingPageComponent } from './pages/rating';
 import { CreateRatingComponent } from './pages/rating/admin-rating-page/create-rating/create-rating.component';
 import { RatingInfoComponent, RatingDeleteDialog } from './pages/rating/admin-rating-page/rating-info/rating-info.component';
 import { RatingChartComponent } from './pages/rating/admin-rating-page/rating-info/rating-chart/rating-chart.component';
@@ -90,7 +90,7 @@ import { CreateFormComponent } from './pages/create-users/create-form/create-for
     CreateFormComponent
   ],
   entryComponents: [RatingDeleteDialog, DialogReviewEnter],
-  providers: [RatingService, ApiService, ApiService2, LoginGuard,
+  providers: [RatingService,  ApiService2, LoginGuard,
     AuthService,
     AdminPage,
     UserService,

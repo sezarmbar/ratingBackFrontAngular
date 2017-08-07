@@ -15,24 +15,42 @@ export class UserService {
 
   initUser() {
     const promise = this.apiService.anonGet(this.config.refresh_token_url).toPromise()
-    .then(res => {
-      if (res.access_token !== null) {
-        return this.getMyInfo().toPromise()
-        .then(user => {
-          this.currentUser = user;
-        });
-      }
-    })
-    .catch(() => null);
+      .then(res => {
+        if (res.access_token !== null) {
+          return this.getMyInfo().toPromise()
+            .then(user => {
+              this.currentUser = user;
+            });
+        }
+      })
+      .catch(() => null);
     return promise;
   }
 
   getMyInfo() {
+
     return this.apiService.get(this.config.whoami_url).map(user => this.currentUser = user);
   }
 
   getAll() {
     return this.apiService.get(this.config.users_url);
   }
-
+  getAllUsers() {
+    console.log('"get ALL : "');
+    this.apiService.getAllUsers(this.config.users_url).subscribe((data) => {
+      return data;
+    }, (error) => console.log(error));
+  }
+  createUser(user) {
+    return this.apiService.createUser(this.config.user_url + '/create', user);
+  }
+  // createUser(use) : Observable < number > {
+  //   let cpHeaders = new Headers({'Content-Type': 'application/json'});
+  //   let options = new RequestOptions({headers: cpHeaders});
+  //   return this
+  //     .http
+  //     .post(this.config.user_url, user, options)
+  //     .map(success => success.status)
+  //     .catch(this.handleError);
+  // }
 }

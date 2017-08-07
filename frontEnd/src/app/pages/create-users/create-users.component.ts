@@ -1,9 +1,7 @@
+import { User } from './';
 import { Component, OnInit } from '@angular/core';
-import { Http, Headers, Response, RequestMethod } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/Rx';
-import 'rxjs/add/observable/throw';
-import { RatingService } from "../rating";
+import { Observable } from 'rxjs/Rx';
+import { UserService, ApiService2, ConfigService } from '../../service';
 @Component({
   selector: 'app-create-users',
   templateUrl: './create-users.component.html',
@@ -12,12 +10,25 @@ import { RatingService } from "../rating";
 export class CreateUsersComponent implements OnInit {
 
   showCreateForm: boolean = true;
-
-  constructor( private http: Http, private ratignService: RatingService) {
+  allUsers: User[];
+  constructor(private userServie: UserService,
+  private apiService: ApiService2,
+    private config: ConfigService) {
   }
 
   ngOnInit() {
-   
+    this.getAllUsers();
+  }
+
+  createUser(user: User) {
+    this.userServie.createUser(user);
+    this.getAllUsers();
+  }
+  getAllUsers() {
+    console.log('"get ALL : "');
+    this.apiService.getAllUsers(this.config.users_url).subscribe((data) => {
+      this.allUsers = data;
+    }, (error) => console.log(error));
   }
 
 }

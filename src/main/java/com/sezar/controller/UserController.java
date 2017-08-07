@@ -37,7 +37,7 @@ public class UserController {
         return this.userService.findAll();
     }
     
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Void> createUser(@RequestBody User user, UriComponentsBuilder builder) {
     	boolean flag = userService.createUser(user);
     	if (flag == false) {

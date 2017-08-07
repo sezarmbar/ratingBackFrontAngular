@@ -1,4 +1,5 @@
-import { Http, Headers, Response, RequestMethod } from '@angular/http';
+import { User } from './../pages/create-users/model/user';
+import { Http, Headers, Response, RequestMethod, RequestOptions } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
@@ -8,10 +9,9 @@ import 'rxjs/add/observable/throw';
 export class ApiService2 {
 
   csrfToken: string;
-  headers = new Headers({
-    'Accept': 'application/json'
-  });
-
+  headers = new Headers({ 'Accept': 'application/json' });
+  cpHeaders = new Headers({ 'Content-Type': 'application/json' });
+  options = new RequestOptions({ headers: this.cpHeaders });
   constructor(
     private http: Http
   ) {
@@ -25,7 +25,7 @@ export class ApiService2 {
         withCredentials: true
       }
     )
-    .map(this.extractData);
+      .map(this.extractData);
   }
 
   get(path: string): Observable<any> {
@@ -36,11 +36,18 @@ export class ApiService2 {
         withCredentials: true
       }
     )
-    .map(this.extractData)
-    .catch(this.checkAuth.bind(this));
+      .map(this.extractData)
+      .catch(this.checkAuth.bind(this));
   }
 
+  getAllUsers(url): Observable<User[]> {
+    return this.http
+      .get(url)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
   post(path: string, body, customHeaders?, put?): Observable<any> {
+    console.log(path + '  ' + body)
     return this.http.request(
       path,
       {
@@ -50,10 +57,18 @@ export class ApiService2 {
         withCredentials: true
       }
     )
-    .map(this.extractData)
-    .catch(this.checkAuth.bind(this));
+      .map(this.extractData)
+      .catch(this.checkAuth.bind(this));
   }
-
+  createUser(path: string, user) {
+    const cpHeaders = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: cpHeaders });
+    return this
+      .http
+      .post(path, user, options)
+      .map(success => success.status)
+      .catch(this.handleError);
+  }
   put(path: string, body: any): Observable<any> {
     return this.post(path, body, true);
   }
@@ -61,7 +76,7 @@ export class ApiService2 {
 
   private extractData(res: Response) {
     const body = res.json();
-    return body || { };
+    return body || {};
   }
 
   // Display error if logged in, otherwise redirect to IDP
@@ -74,4 +89,8 @@ export class ApiService2 {
     throw error;
   }
 
+  private handleError(error: Response | any) {
+    console.error(error.message || error);
+    return Observable.throw(error.status);
+  }
 }
